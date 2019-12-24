@@ -6,4 +6,4 @@ git push -f --delete origin master
 
 git subtree push --prefix public/ origin master
 
-git checkout origin dev
+git checkout dev
