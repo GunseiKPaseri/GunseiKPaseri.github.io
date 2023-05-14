@@ -27,9 +27,18 @@ export type Source = {
 
 const sourcesOrigin: Omit<Source, 'id'>[] = [
   {
-    title: 'E2EENCLOUD',
+    title: 'E2EENCLOUD（仮称）',
     summary: 'クラウドストレージ風サーバアプリ',
-    description: 'クラウドストレージのようにサーバにファイルをアップロード・保管できるアプリケーション。エンドツーエンド暗号化により、サーバには暗号化されたファイルのみが保存される。フロントエンドをNode.js、バックエンドをDenoで開発している（Denoへ統一予定）。バックエンドの動作にはminio・maildev・mysqlを利用しており、DockerComposeで起動できるようになっている。現在は最低限ローカルで稼働させることができるが、デプロイを目指し継続的に開発中。',
+    description: `
+クラウドストレージのようにサーバにファイルをアップロード・保管できるアプリケーション。
+ディレクトリ階層の他タグ付機能により柔軟なファイル管理を提供。
+FIDO2やTOTP等の多要素認証に対応。
+エンドツーエンド暗号化により、サーバには暗号化されたファイルのみが保存される。
+フロントエンドはNode.jsを利用したSPA、バックエンドはDenoで開発したRestAPIサーバ。
+バックエンドの動作にはminio・maildev・mysqlを利用しており、DockerComposeでセットアップできるようになっている。
+現在は最低限ローカルで稼働させることができるが、デプロイに向け継続的に開発中。
+趣味レベルでは最も力を入れている中心的なプロジェクトであり、各種開発ツールの試験的な利用等にも活用している。
+`,
     link: [{
       url: 'https://github.com/GunseiKPaseri/e2eencloud',
       type: 'github',
@@ -40,7 +49,7 @@ const sourcesOrigin: Omit<Source, 'id'>[] = [
   {
     title: 'LyricTyper',
     summary: '歌詞表示アプリ',
-    description: '音楽に合わせてタイミングよく歌詞が動くWebアプリケーション（リリックアプリ）を作ることができる、[TextAlive App API](https://developer.textalive.jp/)を用いて、歌詞をタイピングゲームのように表示して楽しむことができるアプリケーション。**第一回マジカルミライ プログラミングコンテストにて入選**。',
+    description: '音楽に合わせてタイミングよく歌詞が動くWebアプリケーション（リリックアプリ）を作ることができる、[TextAlive App API](https://developer.textalive.jp/)を用いて、歌詞をタイピングゲームのように表示して楽しむことができるアプリケーション。**第一回マジカルミライ プログラミングコンテストにて入選**。グラフィックライブラリを用いずにHTML要素とCSSによる変形で形を作っている。',
     link: [
       {
         url: 'https://github.com/GunseiKPaseri/textalive_lyrictyper',
@@ -56,7 +65,7 @@ const sourcesOrigin: Omit<Source, 'id'>[] = [
   {
     title: 'promise_array_parallel',
     summary: '簡易並列処理パッケージ',
-    description: '与えられた複数の非同期関数について、完了後に並列数を制限しながら別の非同期関数を実行する等を簡易的に実現する。JavaScript標準のPromise.all等と使い心地が揃うようにしている。またGitHubActionを利用し、GitHub経由でリリースするとnpm及びdeno.landにおいて自動で公開されるようになっており、Node.js・Deno両環境で使うことができる。',
+    description: '与えられた複数の非同期関数について、完了後に並列数を制限しながら別の非同期関数を実行する等を簡易的に実現する。JavaScript標準のPromise.all等と使い心地が揃うようにしている。またGitHubActionを利用し、GitHub経由でリリースするとnpm及びdeno.landにおいて自動で公開されるようになっており、Node.js・Deno両環境で使うことができる。研究に必要だった機能の一部を切り出してパッケージ化。',
     link: [{
       url: 'https://github.com/GunseiKPaseri/promise_array_parallel',
       type: 'github',
@@ -69,7 +78,7 @@ const sourcesOrigin: Omit<Source, 'id'>[] = [
   {
     title: 'gunseikpaseri.github.io',
     summary: 'ポートフォリオサイト',
-    description: '作者の実装したアプリケーション等をまとめたポートフォリオサイト。簡単なタグ検索機能が付属する。',
+    description: '作者の実装したアプリケーション等をまとめたこのポートフォリオサイト。簡単なタグ検索機能が付属する。',
     link: [
       {
         url: 'https://github.com/GunseiKPaseri/gunseikpaseri.github.io',
@@ -98,7 +107,7 @@ const sourcesOrigin: Omit<Source, 'id'>[] = [
   {
     title: 'detect-chinese',
     summary: '文字種検出パッケージ',
-    description: '文字列に「中国語にしか使われない漢字が含まれているかどうか」を調べることで、対象の文字列が「中国語かどうか」を判定する。特定の文字が含まれているかを正規表現で検出しているだけだが、Unicodeが5桁になる文字種を正常に判定できるようにする、連続する文字に関してハイフンで結ぶことでファイルサイズを削減する、等の修正を行った。',
+    description: '文字列に「中国語にしか使われない漢字が含まれているかどうか」を調べることで、対象の文字列が「中国語かどうか」を判定する。特定の文字が含まれているかを正規表現で検出しているだけだが、Unicodeが5桁になる文字種を正常に判定できるようにする、連続する文字に関してハイフンで結ぶことでファイルサイズを削減する、等の修正を行いマージされた。',
     link: [{
       url: 'https://github.com/Neos21/detect-chinese',
       type: 'github',
@@ -121,7 +130,7 @@ const sourcesOrigin: Omit<Source, 'id'>[] = [
   {
     title: 'web-crypto-stream（仮称）',
     summary: 'Web Stream APIで暗号化等を行う',
-    description: 'Web Stream APIによりNode.jsに限らずブラウザ上でもストリーム処理が容易に実現できるようになったが、Web Crypto APIの暗号処理・ハッシュ関数については未対応である。[提案](https://github.com/wintercg/proposal-webcrypto-streams/blob/main/explainer.md)はされているものの実現の目途は経っていない様子。E2EEENCLOUDではブラウザ上での暗号化・復号処理が求められるが、これを利用することで暗号化ファイルのダウンロードを待たずに復号処理に移ることができる。実現に向けて作業中。',
+    description: 'Web Stream APIによりNode.jsに限らずブラウザ上でもストリーム処理が容易に実現できるようになったが、Web Crypto APIの暗号処理・ハッシュ関数については未対応である。[提案](https://github.com/wintercg/proposal-webcrypto-streams/blob/main/explainer.md)はされているものの実現の目途は経っていない様子。E2EEENCLOUDではブラウザ上での暗号化・復号処理が求められるが、これを利用することで暗号化ファイルのダウンロードを待たずに復号処理に移ることができる。実現に向けて作業中。暗号処理に自分が実装したプラグインを使うのはセキュリティ的観点からご法度ではあるが、提案が通るまでの繋ぎのつもりで。',
     tag: ['JavaScript'],
   },
 ];
