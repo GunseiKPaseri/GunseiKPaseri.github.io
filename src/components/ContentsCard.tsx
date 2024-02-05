@@ -1,34 +1,49 @@
+import { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
-import Button from '@mui/material/Button';
-
-import GitHubIcon from '@mui/icons-material/GitHub';
-
-import {type Source} from '../source.ts';
-import { TagChip } from './TagChip.tsx';
 import CardMedia from '@mui/material/CardMedia';
-import { Markdown } from './Markdown.tsx';
+import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
+import { styled } from '@mui/material/styles';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Collapse from '@mui/material/Collapse';
 
-const CardLinkButton = (props: {link: NonNullable<Source['link']>[number]}) => {
-  const icon = props.link.type === 'github' ? <GitHubIcon /> : undefined
-  const text = props.link.type === 'github' ? '実装' : props.link.type === 'npm' ? 'npm' : 'リンク'
-  return <Button size="small" href={props.link.url} target="_blank" startIcon={icon}>{text}</Button>
+import { type Source } from '../source.ts';
+import { Markdown } from './Markdown.tsx';
+import { TagList } from './TagList.tsx';
+import { CardLinkButton } from './CardLinkButton.tsx';
+
+interface ExpandMoreProps extends IconButtonProps {
+  expand: boolean;
 }
 
+const ExpandMore = styled((props: ExpandMoreProps) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+
 export const ContentsCard = (props: {source: Source}) => {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  }
+
   return (
-    <Card>
+    <Card sx={{width: "100%"}}>
       <CardContent>
         <Typography variant="h5" component="div">{props.source.title}</Typography>
-        <>
-          {props.source.tag.map(x => <TagChip key={x} tag={x} />)}
-        </>
+        <TagList tags={props.source.tag} />
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {props.source.summary}
         </Typography>
-        <Markdown>{props.source.description}</Markdown>
       </CardContent>
       {
         props.source.img &&
@@ -38,14 +53,27 @@ export const ContentsCard = (props: {source: Source}) => {
           title={props.source.title}
         />
       }
-      {
-        props.source.link &&
-          <CardActions>
-            {
-              props.source.link.map(x => <CardLinkButton key={x.url} link={x} />)
-            }
-          </CardActions>
-      }
+      <CardActions disableSpacing>
+        {
+          props.source.link &&
+            <>
+              {
+                props.source.link.map(x => <CardLinkButton key={x.url} link={x} />)
+              }
+            </>
+        }
+        <ExpandMore
+            expand={expanded}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+          <ExpandMoreIcon />
+        </ExpandMore>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit sx={{p: 1}}>
+        <Markdown>{props.source.description}</Markdown>
+      </Collapse>
     </Card>
   )
 };

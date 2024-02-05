@@ -1,26 +1,50 @@
-export const contentsTags = [
-  'JavaScript',
-  'Deno',
-  'Node.js',
-  'React',
-  'MUI',
-  'Python',
-  'Docker',
-  'SQL',
-  'esolang',
-  '外部提出',
-  '個人開発',
-  'フォーク・コントリビュート',
-  'npmパッケージ公開中',
-] as const;
+import {
+  SiDeno as DenoIcon,
+  SiDocker as DockerIcon,
+  SiJavascript as JavaScriptIcon,
+  SiMui as MuiIcon,
+  SiNodedotjs as NodeIcon,
+  SiNpm as NpmIcon,
+  SiPython as PythonIcon,
+  SiReact as ReactIcon
+} from "react-icons/si";
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkIcon from '@mui/icons-material/Link';
 
-export type ContentsTag = typeof contentsTags[number];
+export const contentsTagLogo = {
+  'Deno': {logo: <DenoIcon />, color: '#000000'},
+  'Docker': {logo: <DockerIcon />, color: '#2496ed'},
+  'JavaScript': {logo: <JavaScriptIcon />, color: '#f7df1e'},
+  'MUI': {logo: <MuiIcon />, color: '#0081cb'},
+  'Node.js': {logo: <NodeIcon />, color: '#68a063'},
+  'Python': {logo: <PythonIcon />, color: '#306998'}, 
+  'React': {logo: <ReactIcon />, color: '#61dafb'},
+  'SQL': undefined,
+  'esolang': undefined,
+  '外部提出': undefined,
+  '個人開発': undefined,
+  'フォーク・コントリビュート': undefined,
+  'npmパッケージ公開中': undefined,
+} as const satisfies Record<string, {logo: JSX.Element, color: string} | undefined>
+
+export type ContentsTag = keyof typeof contentsTagLogo;
+export const contentsTags = Object.keys(contentsTagLogo) as ContentsTag[];
+
+export const linkTypes = {
+  github: {message: '実装', icon: <GitHubIcon />},
+  npm: {message: 'npm', icon: <NpmIcon />},
+  other: {message: 'リンク', icon: <LinkIcon />},
+} as const satisfies Record<string, {message: string, icon: JSX.Element}>;
+
+export type LinkType = keyof typeof linkTypes;
+export const linkType = Object.keys(linkTypes) as LinkType[];
+
 export type Source = {
   id: number,
   title: string,
   description: string,
   summary: string,
-  link?: {url: string, type: 'github' | 'npm' | 'other'}[],
+  link?: {url: string, type: LinkType}[],
   img?: string,
   tag: ContentsTag[],
 };
