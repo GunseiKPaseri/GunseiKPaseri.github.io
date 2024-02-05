@@ -6,7 +6,9 @@ import {
   SiNodedotjs as NodeIcon,
   SiNpm as NpmIcon,
   SiPython as PythonIcon,
-  SiReact as ReactIcon
+  SiReact as ReactIcon,
+  SiCodepen as CodepenIcon,
+  SiZenn as ZennIcon,
 } from "react-icons/si";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkIcon from '@mui/icons-material/Link';
@@ -24,17 +26,19 @@ export const contentsTagLogo = {
   '外部提出': undefined,
   '個人開発': undefined,
   'フォーク・コントリビュート': undefined,
-  'npmパッケージ公開中': undefined,
+  'npmパッケージ公開中': {logo: <NpmIcon />, color: '#cb3837'},
 } as const satisfies Record<string, {logo: JSX.Element, color: string} | undefined>
 
 export type ContentsTag = keyof typeof contentsTagLogo;
 export const contentsTags = Object.keys(contentsTagLogo) as ContentsTag[];
 
 export const linkTypes = {
-  github: {message: '実装', icon: <GitHubIcon />},
-  npm: {message: 'npm', icon: <NpmIcon />},
-  other: {message: 'リンク', icon: <LinkIcon />},
-} as const satisfies Record<string, {message: string, icon: JSX.Element}>;
+  github: {message: '実装', icon: <GitHubIcon />, title: 'GitHub'},
+  npm: {message: 'npm', icon: <NpmIcon />, title: 'npm package'},
+  zenn: {message: '記事', icon: <ZennIcon />, title: 'Zenn'},
+  codepen: {message: 'デモ', icon: <CodepenIcon />, title: 'CodePen'},
+  other: {message: 'リンク', icon: <LinkIcon />, title: 'リンク'},
+} as const satisfies Record<string, {message: string, icon: JSX.Element, title: string}>;
 
 export type LinkType = keyof typeof linkTypes;
 export const linkType = Object.keys(linkTypes) as LinkType[];
@@ -44,7 +48,7 @@ export type Source = {
   title: string,
   description: string,
   summary: string,
-  link?: {url: string, type: LinkType}[],
+  link?: {url: string, type: LinkType, message?: string}[],
   img?: string,
   tag: ContentsTag[],
 };
@@ -62,12 +66,17 @@ FIDO2やTOTP等の多要素認証に対応。
 バックエンドの動作にはminio・maildev・mysqlを利用しており、DockerComposeでセットアップできるようになっている。
 現在は最低限ローカルで稼働させることができるが、デプロイに向け継続的に開発中。
 趣味レベルでは最も力を入れている中心的なプロジェクトであり、各種開発ツールの試験的な利用等にも活用している。
+2023年に技育展にて発表。
 `,
     link: [{
+      url: 'https://docs.google.com/presentation/d/e/2PACX-1vSscrKP19Mm_AKqQygBGAlr0IyOS0Tkd8BJQkSiKCPxLk8d7CTkWd9vW6-U1Bycmw/pub?start=false&loop=false&delayms=3000',
+      type: 'other',
+      message: '発表資料',
+    },{
       url: 'https://github.com/GunseiKPaseri/e2eencloud',
       type: 'github',
     }],
-    tag: ['React', '個人開発', 'Deno', 'Node.js', 'JavaScript', 'Docker', 'SQL', 'MUI'],
+    tag: ['React', '個人開発', '外部提出', 'Deno', 'Node.js', 'JavaScript', 'Docker', 'SQL', 'MUI'],
     img: './e2eencloud.png',
   },
   {
@@ -82,9 +91,30 @@ FIDO2やTOTP等の多要素認証に対応。
       {
         url: 'https://magicalmirai.com/2020/procon/entry.html#entry_no07',
         type: 'other',
+        message: '入選エントリー',
       }
     ],
     tag: ['個人開発', '外部提出', 'Node.js', 'JavaScript'],
+  },
+  {
+    title: 'react-window-system',
+    summary: 'React用ウィンドウシステムライブラリ',
+    description: 'Reactでウィンドウシステムを実現するためのライブラリ。ウィンドウのドラッグ・リサイズ・最小化・最大化・閉じる等の操作を実現する。ウィンドウのZオーダーを保持するための機能も実装。ウィンドウの中身にReactコンポーネントを配置できる。スナップ機能（Windowsで左右にぶつけると半分最大化できたりするやつ）にも対応．',
+    link: [
+      {
+        url: 'https://codesandbox.io/p/sandbox/react-window-system-demo-p75t2w?file=%2Fsrc%2FApp.tsx&from-embed=',
+        type: 'codepen',
+      },{
+      url: 'https://zenn.dev/gunseikpaseri/articles/react-window-system',
+      type: 'zenn',
+    },{
+      url: 'https://github.com/GunseiKPaseri/react-window-system',
+      type: 'github',
+    },{
+      url: 'https://www.npmjs.com/package/react-window-system',
+      type: 'npm',
+    }],
+    tag: ['個人開発', 'React', 'JavaScript', 'npmパッケージ公開中'],
   },
   {
     title: 'promise_array_parallel',
