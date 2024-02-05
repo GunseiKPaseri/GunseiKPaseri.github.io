@@ -34,10 +34,20 @@ function App() {
             </Box>
         <Paper sx={{p: 2, backgroundColor: "rgba(255,255,255,0.4)"}}>
           <Typography variant="body1">
-            <a href="https://github.com/GunseiKPaseri" target="_blank" title="GitHub @GunseiKPaseri" style={{paddingRight: "0.2em"}}><img src="https://badges.pufler.dev/repos/GunseiKPaseri" alt="GitHub repos" style={{height: "1.3em"}} /></a>
-            <a href="https://atcoder.jp/users/GunseiKPaseri" target="_blank" title="AtCoder @GunseiKPaseri" style={{paddingRight: "0.2em"}}><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FGunseiKPaseri" alt="AtCoder Rates" style={{height: "1.3em"}} /></a>
-            <a href="https://qiita.com/GunseiKPaseri" target="_blank" title="Qiita @GunseiKPaseri" style={{paddingRight: "0.2em"}}><img src="https://badgen.org/img/qiita/GunseiKPaseri/articles?style=flat" alt="Qiita Articles" style={{height: "1.3em"}} /></a>
-            <a href="https://zenn.dev/gunseikpaseri" target="_blank" title="Zenn @gunseikpaseri" style={{paddingRight: "0.2em"}}><img src="https://badgen.org/img/zenn/gunseikpaseri/articles?style=flat" alt="Zenn Articles" style={{height: "1.3em"}} /></a>
+            {
+              ([
+                {href: "https://twitter.com/GunseiKPaseri", alt: "Twitter", imgsrc: "https://img.shields.io/twitter/follow/GunseiKPaseri?style=social", title: "Twitter @GunseiKPaseri"},
+                {href: "https://github.com/GunseiKPaseri", alt: "GitHub repos", imgsrc: "https://badges.pufler.dev/repos/GunseiKPaseri", title: "GitHub @GunseiKPaseri"},
+                {href: "https://atcoder.jp/users/GunseiKPaseri", alt: "AtCoder Rates", imgsrc: "https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FGunseiKPaseri", title: "AtCoder @GunseiKPaseri"},
+                {href: "https://qiita.com/GunseiKPaseri", alt: "Qiita Articles", imgsrc: "https://badgen.org/img/qiita/GunseiKPaseri/articles?style=flat", title: "Qiita @GunseiKPaseri"},
+                {href: "https://zenn.dev/gunseikpaseri", alt: "Zenn Articles", imgsrc: "https://badgen.org/img/zenn/gunseikpaseri/articles?style=flat", title: "Zenn @gunseikpaseri"}
+              ] satisfies {href: string, alt: string, imgsrc: string, title: string}[])
+              .map(x => 
+                <a key={x.alt} href={x.href} target="_blank" title={x.title} style={{paddingRight: "0.2em"}}>
+                  <img src={x.imgsrc} alt={x.alt} style={{height: "1.3em"}} />
+                </a>
+              )
+            }
           </Typography>
         </Paper>
       </Paper>
