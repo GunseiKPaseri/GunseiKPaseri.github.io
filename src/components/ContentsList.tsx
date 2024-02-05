@@ -8,18 +8,30 @@ import { appContext } from "../state/context";
 import { TagList } from "./TagList";
 import TextField from "@mui/material/TextField";
 
+const reRegExp = /[\\^$.*+?()[\]{}|]/g
+
+const escapeRegExp = (str: string) => {
+  return str.replace(reRegExp, '\\$&')
+}
+
+const normalize = (str: string) => str.toLowerCase();
+const normalizeMarkRegExp = (keyword: string) => new RegExp(`(${escapeRegExp(normalize(keyword))})`, "ig");
+
 const findSource = (keyword: string, selectedTags: ContentsTag[]) => {
   const filteredSource = selectedTags.length === 0
     ? sources
     : sources.filter(x => selectedTags.every((t => x.tag.includes(t))))
-  return keyword !== "" ? filteredSource
-    .filter(x => x.title.includes(keyword) || x.summary.includes(keyword) || x.description.includes(keyword))
+  const normalizedKeyword = normalize(keyword);
+  if (keyword === "") return filteredSource;
+  const rg = normalizeMarkRegExp(keyword)
+  return filteredSource
+    .filter(x => normalize(x.title).includes(normalizedKeyword) || normalize(x.summary).includes(normalizedKeyword) || normalize(x.description).includes(normalizedKeyword))
     .map(x=>({
       ...x,
-      title: x.title.replaceAll(keyword, `<mark>${keyword}</mark>`),
-      summary: x.summary.replaceAll(keyword, `<mark>${keyword}</mark>`),
-      description: x.description.replaceAll(keyword, `<mark>${keyword}</mark>`),
-    })) : filteredSource;
+      title: x.title.replaceAll(rg, `<mark>$1</mark>`),
+      summary: x.summary.replaceAll(rg, `<mark>$1</mark>`),
+      description: x.description.replaceAll(rg, `<mark>$1</mark>`),
+    }))
 }
 
 export const ContentsList = () => {

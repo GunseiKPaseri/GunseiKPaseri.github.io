@@ -1,4 +1,5 @@
 import {
+  SiBun as BunIcon,
   SiDeno as DenoIcon,
   SiDocker as DockerIcon,
   SiJavascript as JavaScriptIcon,
@@ -14,6 +15,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkIcon from '@mui/icons-material/Link';
 
 export const contentsTagLogo = {
+  'Bun': {logo: <BunIcon />, color: '#f3e8b8'},
   'Deno': {logo: <DenoIcon />, color: '#000000'},
   'Docker': {logo: <DockerIcon />, color: '#2496ed'},
   'JavaScript': {logo: <JavaScriptIcon />, color: '#f7df1e'},
@@ -27,6 +29,7 @@ export const contentsTagLogo = {
   '個人開発': undefined,
   'フォーク・コントリビュート': undefined,
   'npmパッケージ公開中': {logo: <NpmIcon />, color: '#cb3837'},
+  'GitHubリポジトリ公開中': {logo: <GitHubIcon />, color: '#181717'},
 } as const satisfies Record<string, {logo: JSX.Element, color: string} | undefined>
 
 export type ContentsTag = keyof typeof contentsTagLogo;
@@ -53,7 +56,9 @@ export type Source = {
   tag: ContentsTag[],
 };
 
-const sourcesOrigin: Omit<Source, 'id'>[] = [
+type SourceOmited = Omit<Source, 'id' | 'tag'> & {tag: Exclude<ContentsTag, 'npmパッケージ公開中' | 'GitHubリポジトリ公開中'>[]};
+
+const sourcesOrigin: SourceOmited[] = [
   {
     title: 'E2EENCLOUD（仮称）',
     summary: 'クラウドストレージ風サーバアプリ',
@@ -81,7 +86,7 @@ FIDO2やTOTP等の多要素認証に対応。
   },
   {
     title: 'LyricTyper',
-    summary: '歌詞表示アプリ',
+    summary: '歌詞連動アニメーション',
     description: '音楽に合わせてタイミングよく歌詞が動くWebアプリケーション（リリックアプリ）を作ることができる、[TextAlive App API](https://developer.textalive.jp/)を用いて、歌詞をタイピングゲームのように表示して楽しむことができるアプリケーション。**第一回マジカルミライ プログラミングコンテストにて入選**。グラフィックライブラリを用いずにHTML要素とCSSによる変形で形を作っている。',
     link: [
       {
@@ -114,11 +119,11 @@ FIDO2やTOTP等の多要素認証に対応。
       url: 'https://www.npmjs.com/package/react-window-system',
       type: 'npm',
     }],
-    tag: ['個人開発', 'React', 'JavaScript', 'npmパッケージ公開中'],
+    tag: ['個人開発', 'Bun', 'React', 'JavaScript'],
   },
   {
     title: 'promise_array_parallel',
-    summary: '簡易並列処理パッケージ',
+    summary: '簡易並列処理ライブラリ',
     description: '与えられた複数の非同期関数について、完了後に並列数を制限しながら別の非同期関数を実行する等を簡易的に実現する。JavaScript標準のPromise.all等と使い心地が揃うようにしている。またGitHubActionを利用し、GitHub経由でリリースするとnpm及びdeno.landにおいて自動で公開されるようになっており、Node.js・Deno両環境で使うことができる。研究の際に欲しかった機能を改めてパッケージ化。',
     link: [{
       url: 'https://github.com/GunseiKPaseri/promise_array_parallel',
@@ -189,10 +194,15 @@ FIDO2やTOTP等の多要素認証に対応。
   },
 ];
 
-export const sources = sourcesOrigin.map((s, i) => {
+export const sources = sourcesOrigin.map((s, i): Source => {
+  const tag: Source['tag'] = [
+    ...s.tag,
+    ...(s.link?.some(x => x.type === 'npm') ? ['npmパッケージ公開中'] as const : []),
+    ...(s.link?.some(x => x.type === 'github') ? ['GitHubリポジトリ公開中'] as const : []),
+  ]
   return ({
     ...s,
-    tag: (s.link?.some(x => x.type === 'npm') ? [...s.tag, 'npmパッケージ公開中'] : s.tag),
+    tag,
     id: i
   } satisfies Source)
 });
