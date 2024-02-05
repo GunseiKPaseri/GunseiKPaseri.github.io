@@ -39,10 +39,10 @@ export const ContentsCard = (props: {source: Source}) => {
   return (
     <Card sx={{width: "100%"}}>
       <CardContent>
-        <Typography variant="h5" component="div">{props.source.title}</Typography>
+        <Typography variant="h5" component="div"><Markdown>{props.source.title}</Markdown></Typography>
         <TagList tags={props.source.tag} />
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {props.source.summary}
+          <Markdown>{props.source.summary}</Markdown>
         </Typography>
       </CardContent>
       {
@@ -72,7 +72,9 @@ export const ContentsCard = (props: {source: Source}) => {
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit sx={{p: 1}}>
-        <Markdown>{props.source.description}</Markdown>
+        <Typography variant="body1">
+          <Markdown>{props.source.description}</Markdown>
+        </Typography>
       </Collapse>
     </Card>
   )
