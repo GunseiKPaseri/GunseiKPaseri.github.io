@@ -2,6 +2,7 @@ import {
   SiBun as BunIcon,
   SiDeno as DenoIcon,
   SiDocker as DockerIcon,
+  SiGithub as GitHubIcon,
   SiJavascript as JavaScriptIcon,
   SiMui as MuiIcon,
   SiNodedotjs as NodeIcon,
@@ -11,7 +12,6 @@ import {
   SiCodepen as CodepenIcon,
   SiZenn as ZennIcon,
 } from "react-icons/si";
-import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkIcon from '@mui/icons-material/Link';
 
 export const contentsTagLogo = {

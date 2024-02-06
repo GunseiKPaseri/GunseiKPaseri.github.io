@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import { appContext, tagClick } from "../state/context";
 import { ContentsTag, contentsTagLogo } from "../source";
 
-const FixedChipIcon = (props: {children: React.ReactNode}) => <Box sx={{ml: "0.5ex", position: "relative", top: "0.25ex"}}>{props.children}</Box>;
+const FixedChipIcon = (props: {children: React.ReactNode}) => <Box sx={{ml: "0.5ex", position: "relative", top: "0.35ex", left: "0.1ex"}}>{props.children}</Box>;
 
 const TagIcon = (props: {tag: ContentsTag, active: boolean}) => {
   const result = contentsTagLogo[props.tag] ?? undefined;

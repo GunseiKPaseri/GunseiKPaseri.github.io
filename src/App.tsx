@@ -9,7 +9,7 @@ import './googlefont.css';
 
 function App() {
   return (
-    <Container maxWidth="lg">
+    <Container>
       <Paper
         sx={{
           color: 'white',
@@ -23,12 +23,31 @@ function App() {
           backgroundImage: `linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('./background.png')`,
         }}
       >
-            <Box
-            >
-              <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+            <Box>
+              <Typography component="h1" variant="h3" color="inherit" gutterBottom sx={(theme) => ({
+                [theme.breakpoints.down('md')]:{
+                  fontSize: "2.5em",
+                },
+                [theme.breakpoints.down('sm')]:{
+                  fontSize: "2em",
+                },
+                [theme.breakpoints.down(400)]: {
+                  fontSize: "1.5em",
+                }
+              })}>
                 <span className='googlefont-orbitron'>GunseiKPaseri portfolio</span>
               </Typography>
-              <Typography variant="h5" color="inherit" paragraph>
+              <Typography variant="h5" color="inherit" paragraph sx={(theme) => ({
+                [theme.breakpoints.down('md')]:{
+                  fontSize: "1.3em",
+                },
+                [theme.breakpoints.down('sm')]:{
+                  fontSize: "1.2em",
+                },
+                [theme.breakpoints.down(400)]: {
+                  fontSize: "1em",
+                }
+              })}>
                 これまで作成したものをまとめています。
               </Typography>
             </Box>

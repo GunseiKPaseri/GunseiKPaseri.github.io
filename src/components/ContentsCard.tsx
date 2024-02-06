@@ -13,6 +13,7 @@ import { type Source } from '../source.ts';
 import { Markdown } from './Markdown.tsx';
 import { TagList } from './TagList.tsx';
 import { CardLinkButton } from './CardLinkButton.tsx';
+import Stack from '@mui/material/Stack';
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -54,14 +55,16 @@ export const ContentsCard = (props: {source: Source}) => {
         />
       }
       <CardActions disableSpacing>
-        {
-          props.source.link &&
-            <>
-              {
-                props.source.link.map(x => <CardLinkButton key={x.url} link={x} />)
-              }
-            </>
-        }
+        <Stack spacing={1} direction="row">
+          {
+            props.source.link &&
+              <>
+                {
+                  props.source.link.map(x => <CardLinkButton key={x.url} link={x} />)
+                }
+              </>
+          }
+        </Stack>
         <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
