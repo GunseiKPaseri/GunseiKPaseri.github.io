@@ -4,8 +4,6 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
 import CardMedia from '@mui/material/CardMedia';
-import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
-import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
 
@@ -14,21 +12,8 @@ import { Markdown } from './Markdown.tsx';
 import { TagList } from './TagList.tsx';
 import { CardLinkButton } from './CardLinkButton.tsx';
 import Stack from '@mui/material/Stack';
+import { ExpandMore } from './util/ExpandMore.tsx';
 
-interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean;
-}
-
-const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand: _expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
 
 export const ContentsCard = (props: {source: Source}) => {
   const [expanded, setExpanded] = useState(false);

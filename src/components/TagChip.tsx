@@ -10,7 +10,7 @@ const FixedChipIcon = (props: {children: React.ReactNode}) => <Box sx={{ml: "0.5
 
 const TagIcon = (props: {tag: ContentsTag, active: boolean}) => {
   const result = contentsTagLogo[props.tag] ?? undefined;
-  if(result) return <span style={{color: props.active ? result.color : undefined}}><FixedChipIcon>{result.logo}</FixedChipIcon></span>;
+  if(result && 'logo' in result) return <span style={{color: props.active ? result.logo.color : undefined}}><FixedChipIcon>{result.logo.icon}</FixedChipIcon></span>;
   return <></>;
 };
 

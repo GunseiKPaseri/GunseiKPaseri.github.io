@@ -3,7 +3,7 @@ import IconButton from "@mui/material/IconButton";
 
 import { useWindowSize } from "../util";
 import { linkTypes, type Source } from "../source"
-import { Tooltip } from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
 
 export const CardLinkButton = (props: {link: NonNullable<Source['link']>[number]}) => {
   const result = linkTypes[props.link.type];
@@ -15,7 +15,7 @@ export const CardLinkButton = (props: {link: NonNullable<Source['link']>[number]
           ? <IconButton
               color="primary"
               size="small"
-              title={result.title}
+              //title={result.title}
               href={props.link.url}
               target="_blank"
             >
@@ -23,7 +23,7 @@ export const CardLinkButton = (props: {link: NonNullable<Source['link']>[number]
             </IconButton>
           : <Button
               size="small"
-              title={result.title}
+              //title={result.title}
               href={props.link.url}
               target="_blank"
               startIcon={result.icon}
