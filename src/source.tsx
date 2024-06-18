@@ -4,6 +4,7 @@ import {
   SiDocker as DockerIcon,
   SiGithub as GitHubIcon,
   SiJavascript as JavaScriptIcon,
+  SiJquery as JqueryIcon,
   SiJsr as JsrIcon,
   SiMui as MuiIcon,
   SiNodedotjs as NodeIcon,
@@ -14,36 +15,49 @@ import {
   SiCodesandbox as CodesandboxIcon,
   SiZenn as ZennIcon,
 } from "react-icons/si";
+import {
+  MdExtension as ExtensionIcon,
+} from "react-icons/md";
 import LinkIcon from '@mui/icons-material/Link';
 import { OmitByValue, PickByValue, entries, keys } from "./util";
 
 export const contentsTagLogo = {
-  'Bun': {logo: {icon: <BunIcon />, color: '#f3e8b8'}, type: 'skill'},
-  'Deno': {logo: {icon: <DenoIcon />, color: '#000000'}, type: 'skill'},
-  'Docker': {logo: {icon: <DockerIcon />, color: '#2496ed'}, type: 'skill'},
-  'JavaScript': {logo: {icon: <JavaScriptIcon />, color: '#f7df1e'}, type: 'skill'},
-  'MUI': {logo: {icon: <MuiIcon />, color: '#0081cb'}, type: 'skill'},
-  'Node.js': {logo: {icon: <NodeIcon />, color: '#68a063'}, type: 'skill'},
-  'Python': {logo: {icon: <PythonIcon />, color: '#306998'}, type: 'skill'}, 
-  'React': {logo: {icon: <ReactIcon />, color: '#61dafb'}, type: 'skill'},
-  'Chevrotain': {type: 'skill'},
-  'Peg.js/Peggy': {type: 'skill'},
-  '構文解析': {type: 'skill'},
-  'SQL': {type: 'skill'},
-  'アプリ': {type: 'genre'},
-  'モジュール': {type: 'genre'},
-  'CUIツール': {type: 'genre'},
-  'esolang': {type: 'genre'},
-  '課題': {type: 'state'},
-  '研究用': {type: 'state'},
-  '自分用': {type: 'state'},
-  'コンテスト向け': {type: 'state'},
-  '個人開発': {type: 'state'},
-  'フォーク・コントリビュート': {type: 'state'},
-  'jsr公開中': {logo: {icon: <JsrIcon />, color: '#f3e8b8'}, type: 'auto'},
-  'npm公開中': {logo: {icon: <NpmIcon />, color: '#cb3837'}, type: 'auto'},
-  'GitHub公開中': {logo: {icon: <GitHubIcon />, color: '#181717'}, type: 'auto'},
-} as const satisfies Record<string, {logo?:{icon: JSX.Element, color: string}, type: 'skill' | 'auto' | 'state' | 'genre'}>
+  'Bun': {logo: {icon: <BunIcon />, color: '#f3e8b8'}, type: 'skill', description: 'JavaScriptランタイム'},
+  'Chevrotain': {type: 'skill', description: 'パーサービルダー'},
+  'Deno': {logo: {icon: <DenoIcon />, color: '#000000'}, type: 'skill', description: 'JavaScriptランタイム'},
+  'Docker': {logo: {icon: <DockerIcon />, color: '#2496ed'}, type: 'skill', description: 'コンテナ化技術'},
+  'JavaScript': {logo: {icon: <JavaScriptIcon />, color: '#f7df1e'}, type: 'skill', description: 'Webプログラミング言語'},
+  'jQuery': {logo: {icon: <JqueryIcon />, color: '#0865a7'}, type: 'skill', description: 'DOM操作ライブラリ'},
+  'MUI': {logo: {icon: <MuiIcon />, color: '#0081cb'}, type: 'skill', description: 'UIコンポーネントライブラリ'},
+  'Node.js': {logo: {icon: <NodeIcon />, color: '#68a063'}, type: 'skill', description: 'JavaScriptランタイム'},
+  'Python': {logo: {icon: <PythonIcon />, color: '#306998'}, type: 'skill', description: '汎用プログラミング言語'}, 
+  'React': {logo: {icon: <ReactIcon />, color: '#61dafb'}, type: 'skill', description: 'UI開発ライブラリ'},
+  'Peg.js/Peggy': {type: 'skill', description: 'パーサージェネレーター'},
+  'SQL': {type: 'skill', description: 'DB操作'},
+  '構文解析': {type: 'skill', description: 'テキストの構造化'},
+  '画像処理': {type: 'skill', description: ''},
+  'アプリ': {type: 'genre', description: ''},
+  'モジュール': {type: 'genre', description: 'アプリに組み込む頒布可能な状態の部分要素'},
+  'CUIツール': {type: 'genre', description: ''},
+  'スクリプト': {type: 'genre', description: ''},
+  '設定ファイル': {type: 'genre', description: ''},
+  'ブラウザ拡張機能': {type: 'genre', description: ''},
+  'esolang': {type: 'genre', description: '難解プログラミング言語'},
+  '課題': {type: 'state', description: ''},
+  '研究用': {type: 'state', description: ''},
+  '自分用': {type: 'state', description: ''},
+  'コンテスト向け': {type: 'state', description: ''},
+  '個人開発': {type: 'state', description: ''},
+  'フォーク・コントリビュート': {type: 'state', description: ''},
+  'jsr公開中': {logo: {icon: <JsrIcon />, color: '#f3e8b8'}, type: 'auto', description: 'パッケージ配布中'},
+  'npm公開中': {logo: {icon: <NpmIcon />, color: '#cb3837'}, type: 'auto', description: 'パッケージ配布中'},
+  'deno/x公開中': {logo: {icon: <DenoIcon />, color: '#000000'}, type: 'auto', description: 'パッケージ配布中'},
+  'GitHub公開中': {logo: {icon: <GitHubIcon />, color: '#181717'}, type: 'auto', description: 'リポジトリ公開中'},
+} as const satisfies Record<string, {
+  logo?:{icon: JSX.Element, color: string},
+  type: 'skill' | 'auto' | 'state' | 'genre',
+  description: string
+}>
 
 export const contentsTags = keys(contentsTagLogo);
 const contentsTagEntries = entries(contentsTagLogo)
@@ -61,9 +75,11 @@ export const linkTypes = {
   jsr: {message: 'jsr', icon: <JsrIcon />, title: 'JSR', domain:['jsr.io']},
   github: {message: '実装', icon: <GitHubIcon />, title: 'GitHub', domain:['github.com']},
   npm: {message: 'npm', icon: <NpmIcon />, title: 'npm package', domain: ['npmjs.com']},
+  deno: {message: 'deno/x', icon: <DenoIcon />, title: 'deno.land/x', domain: ['deno.land']},
   zenn: {message: '記事', icon: <ZennIcon />, title: 'Zenn', domain: ['zenn.dev']},
   codepen: {message: 'デモ', icon: <CodepenIcon />, title: 'CodePen', domain: ['codepen.io']},
   codesandbox: {message: 'デモ', icon: <CodesandboxIcon />, title: 'CodeSandbox', domain: ['codesandbox.io']},
+  extension: {message: '導入', icon: <ExtensionIcon />, title: 'ブラウザ拡張機能', domain: ['chromewebstore.google.com']},
   other: {message: 'リンク', icon: <LinkIcon />, title: 'リンク', domain: []},
 } as const satisfies Record<string, {message: string, icon: JSX.Element, title: string, domain: string[]}>;
 
@@ -76,6 +92,7 @@ export type Source = {
   id: number,
   title: string,
   description: string,
+  date: string,
   summary: string,
   link?: LinkDetail[],
   img?: string,
@@ -103,6 +120,7 @@ iniのパースを行う際、改行・タグ・空白文字を無視するこ�
       'https://zenn.dev/gunseikpaseri/articles/parser-published-jsr',
     ],
     tag: ['Deno', '個人開発', '自分用', 'JavaScript', '構文解析', 'Chevrotain', 'モジュール'],
+    date: '2024-06-01',
   },
   {
     title: 'perfect-json-parser',
@@ -117,6 +135,7 @@ JSONのパースを行う際、改行・タグ・空白文字を無視するこ�
       'https://zenn.dev/gunseikpaseri/articles/parser-published-jsr',
     ],
     tag: ['Deno', '個人開発', '自分用', 'JavaScript', '構文解析', 'Chevrotain', 'モジュール'],
+    date: '2024-06-01',
   },
   {
     title: 'E2EENCLOUD（仮称）',
@@ -142,6 +161,7 @@ FIDO2やTOTP等の多要素認証に対応。
     ],
     tag: ['React', '個人開発', 'コンテスト向け', 'Deno', 'Node.js', 'JavaScript', 'Docker', 'SQL', 'MUI', 'アプリ'],
     img: './e2eencloud.png',
+    date: '2023-08-12',
   },
   {
     title: 'LyricTyper',
@@ -155,7 +175,9 @@ FIDO2やTOTP等の多要素認証に対応。
         message: '入選エントリー',
       }
     ],
+    img: './lyrictyper.png',
     tag: ['個人開発', 'コンテスト向け', 'Node.js', 'JavaScript', 'アプリ'],
+    date: '2020-09-18',
   },
   {
     title: 'react-window-system',
@@ -167,7 +189,9 @@ FIDO2やTOTP等の多要素認証に対応。
       'https://github.com/GunseiKPaseri/react-window-system',
       'https://www.npmjs.com/package/react-window-system',
     ],
+    img: './react-window-system.png',
     tag: ['個人開発', '自分用', 'Bun', 'React', 'JavaScript', 'モジュール'],
+    date: '2024-02-05',
   },
   {
     title: 'promise_array_parallel',
@@ -176,8 +200,10 @@ FIDO2やTOTP等の多要素認証に対応。
     link: [
       'https://github.com/GunseiKPaseri/promise_array_parallel',
       'https://www.npmjs.com/package/promise_array_parallel',
+      'https://deno.land/x/promise_array_parallel'
     ],
     tag: ['個人開発', '研究用', 'Deno', 'Node.js', 'JavaScript', 'モジュール'],
+    date: '2022-11-01',
   },
   {
     title: 'gunseikpaseri.github.io',
@@ -187,7 +213,19 @@ FIDO2やTOTP等の多要素認証に対応。
       'https://github.com/GunseiKPaseri/gunseikpaseri.github.io',
       'https://gunseikpaseri.github.io/'
     ],
-    tag: ['個人開発', 'JavaScript', 'React', 'MUI', 'アプリ'],
+    tag: ['個人開発', '自分用', 'JavaScript', 'React', 'MUI', 'アプリ'],
+    date: '2023-05-15',
+  },
+  {
+    title: 'deno-session',
+    summary: 'Opine用セッション管理ライブラリ',
+    description: '[Opine](https://deno.land/x/opine)用のセッション管理ライブラリ。既存のものが型解決するようにTypeScriptで書き直し。実装直後に[oak](https://deno.land/x/oak)でええやんで放置。',
+    link: [
+      'https://github.com/GunseiKPaseri/deno-session',
+      'https://zenn.dev/gunseikpaseri/articles/deno-session-third-pirty',
+    ],
+    tag: ['個人開発', '自分用', 'Deno', 'JavaScript', 'モジュール'],
+    date: '2022-01-08',
   },
   {
     title: 'tenjijs（仮称）',
@@ -196,6 +234,7 @@ FIDO2やTOTP等の多要素認証に対応。
     link: ['https://github.com/GunseiKPaseri/tenjijs'],
     img: './tenjijs.png',
     tag: ['個人開発', '課題', 'JavaScript', 'esolang', '構文解析', 'Peg.js/Peggy'],
+    date: '2023-01-07',
   },
   {
     title: 'detect-chinese',
@@ -206,6 +245,65 @@ FIDO2やTOTP等の多要素認証に対応。
       'https://www.npmjs.com/package/@neos21/detect-chinese',
     ],
     tag: ['フォーク・コントリビュート', '自分用', 'JavaScript', 'モジュール'],
+    date: '2022-07-26',
+  },
+  {
+    title: 'imghashjs',
+    summary: '類似画像検出ライブラリ',
+    description: 'imghashと呼ばれる画像要約技術で、類似した画像を列挙するために使用可能なライブラリです。ahash・dhash・mhash・phashに対応。ブラウザ・node.js両対応。python等の出力に揃えようと試みたまま止まっている。',
+    link: [
+      'https://github.com/GunseiKPaseri/imghashjs',
+      'https://www.npmjs.com/package/imghashjs',
+    ],
+    tag: ['自分用', 'JavaScript', 'モジュール', 'Node.js', '画像処理'],
+    date: '2022-03-13',
+  },
+  {
+    title: '俺得拡張機能集',
+    summary: '自分用アーミーナイフ',
+    description: 'QRコードの表示、文字化け変換、Unicodeの表示機能を有する',
+    link: [
+      'https://chromewebstore.google.com/detail/%E4%BF%BA%E5%BE%97%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD%E9%9B%86/ikaoaeddhkepbhjbfjjnpghheikmgmda'
+    ],
+    tag: ['自分用', 'JavaScript', 'ブラウザ拡張機能', 'jQuery'],
+    date: '2021-08-19'
+  },
+  {
+    title: 'PicPickDL',
+    summary: '画像ダウンロードツール',
+    description: '現在表示中のWebページ内に存在する画像を一覧表示・表示位置検知するブラウザ拡張機能。恐らく現在は正常に動作しない。',
+    link: [
+      'https://github.com/GunseiKPaseri/picpickdl',
+      'https://chromewebstore.google.com/detail/picpickdl/blmeebooelogdcajapgeiooajiphebpp'
+    ],
+    img: './picpickdl.jpg',
+    tag: ['自分用', 'アプリ', 'JavaScript', 'ブラウザ拡張機能', 'React', 'MUI'],
+    date: '2021-09-27',
+  },
+  {
+    title: 'Mery構文ファイル',
+    summary: 'Mery用の色分けファイル',
+    description: 'テキストエディタMeryの色分け用の構文ファイルです。JavaScriptとCSS3を用意しています。',
+    link: ['https://github.com/GunseiKPaseri/Mery_msy'],
+    tag: ['自分用', '設定ファイル'],
+    date: '2018-02-08',
+  },
+  {
+    title: 'SimpleClock',
+    summary: '時計アプリ',
+    description: '簡単な時計アプリです。年越しとかゾロ目の時を眺めるのに使います。',
+    link: ['https://github.com/GunseiKPaseri/SimpleClock', 'https://gunseikpaseri.github.io/SimpleClock/'],
+    tag: ['自分用', 'アプリ', 'JavaScript', 'jQuery'],
+    img: './simpleclock.png',
+    date: '2017-10-07'
+  },
+  {
+    title: 'カスタムbashプロンプト',
+    summary: '自作のパンくずリスト型表示',
+    description: 'bashのプロンプトを自作しました。パンくずリスト型でディレクトリ情報・git情報・pyenv等を表示します。現在は[starship](https://starship.rs/ja-JP/)を利用しているので使用していないです。',
+    link: ['https://qiita.com/GunseiKPaseri/items/e594c8e261905e3d0281'],
+    tag: ['自分用', 'スクリプト'],
+    date: '2020-09-17'
   },
   {
     title: 'sb.webscraping',
@@ -213,6 +311,22 @@ FIDO2やTOTP等の多要素認証に対応。
     description: 'ニコニコ大百科記事の自動取得を行うスクリプト。ユーザ記事・動画記事を仕様変更やお絵カキコ・ピコカキコを取得できるよう[変更を加えた](https://github.com/GunseiKPaseri/sb.webscraping/compare/857aaa0...5453de5)。メンテナンスを行っていないため現在動作するか不明。',
     link: ['https://github.com/GunseiKPaseri/sb.webscraping/tree/somefix'],
     tag: ['フォーク・コントリビュート', '自分用', 'Python', 'CUIツール'],
+    date: '2020-09-08'
+  },
+  {
+    title: '.dotfiles',
+    summary: '個人設定ファイル',
+    description: '自分用の設定ファイルをまとめたリポジトリ。zshrc・vimrc・tmux.conf等が含まれる。',
+    tag: ['自分用', '設定ファイル'],
+    link: ['https://github.com/GunseiKPaseri/.dotfiles'],
+    date: '2023-01-21'
+  },
+  {
+    title: '自宅サーバ',
+    summary: '自宅サーバ構築',
+    description: '自宅サーバをRaspiで運用しています。dockerを利用しNextcloud・Jellyfin・Gitea等を利用中。公開できるものを用意したい。',
+    tag: ['自分用', 'Docker'],
+    date: '2023-02-11'
   }
 ];
 
@@ -229,6 +343,7 @@ export const sources = sourcesOrigin.map((s, i): Source => {
   const link: Source['link'] = s.link?.map(x => typeof x === 'string' ? linkDetailSuggester(x) : x)
   const tag: Source['tag'] = [
     ...s.tag,
+    ...(link?.some(x => x.type === 'deno') ? ['deno/x公開中'] as const : []),
     ...(link?.some(x => x.type === 'jsr') ? ['jsr公開中'] as const : []),
     ...(link?.some(x => x.type === 'npm') ? ['npm公開中'] as const : []),
     ...(link?.some(x => x.type === 'github') ? ['GitHub公開中'] as const : []),
@@ -241,3 +356,9 @@ export const sources = sourcesOrigin.map((s, i): Source => {
     id: i
   } satisfies Source)
 });
+
+
+const sourcesValue = Object.values(sources)
+export const contentsTagCount = Object.fromEntries(contentsTags.map((tag): [ContentsTag, number] => {
+  return [tag, sourcesValue.reduce((acc, x) => x.tag.includes(tag) ? acc + 1 : acc, 0)]
+})) as Record<ContentsTag, number>;

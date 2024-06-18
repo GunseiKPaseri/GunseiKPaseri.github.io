@@ -6,6 +6,8 @@ import CardActions from '@mui/material/CardActions';
 import CardMedia from '@mui/material/CardMedia';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
+import { IconButton, Tooltip, useTheme } from '@mui/material';
+import { MdNewReleases as NewReleasesIcon } from "react-icons/md";
 
 import { type Source } from '../source.ts';
 import { Markdown } from './Markdown.tsx';
@@ -14,6 +16,16 @@ import { CardLinkButton } from './CardLinkButton.tsx';
 import Stack from '@mui/material/Stack';
 import { ExpandMore } from './util/ExpandMore.tsx';
 
+const NewBudge = () => {
+  const theme = useTheme();
+  return (
+    <Tooltip title="半年以内に公開">
+      <IconButton>
+        <NewReleasesIcon color={theme.palette.primary.light} style={{marginRight: '0.2em'}} />
+      </IconButton>
+    </Tooltip>
+  )
+}
 
 export const ContentsCard = (props: {source: Source}) => {
   const [expanded, setExpanded] = useState(false);
@@ -22,14 +34,18 @@ export const ContentsCard = (props: {source: Source}) => {
     setExpanded(!expanded);
   }
 
+  const date = new Date(props.source.date)
+  const dateString = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`
+  // 半年以内の記事はnewマークを表示
+  const recent = (Date.now() - date.getTime()) < 1000 * 60 * 60 * 24 * 180
+
   return (
     <Card sx={{width: "100%"}}>
       <CardContent>
-        <Typography variant="h5" component="div"><Markdown>{props.source.title}</Markdown></Typography>
+        <Typography variant="h5" component="div">{recent && <NewBudge />}<Markdown>{props.source.title}</Markdown></Typography>
+        <Typography variant="body2" color="text.secondary">公開日: {dateString}</Typography>
         <TagList tags={props.source.tag} />
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          <Markdown>{props.source.summary}</Markdown>
-        </Typography>
+        <Markdown overrides={{p: { component: Typography, props: {color: 'text.secondary'} }}}>{props.source.summary}</Markdown>
       </CardContent>
       {
         props.source.img &&
@@ -60,9 +76,7 @@ export const ContentsCard = (props: {source: Source}) => {
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit sx={{p: 1}}>
-        <Typography variant="body1">
-          <Markdown>{props.source.description}</Markdown>
-        </Typography>
+        <Markdown>{props.source.description}</Markdown>
       </Collapse>
     </Card>
   )

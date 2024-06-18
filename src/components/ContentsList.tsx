@@ -51,19 +51,12 @@ export const ContentsList = () => {
         <AnimatePresence mode="popLayout">
         {
 
-          narrowDownSources.filter(x=>x.visible).map(x => {
+          narrowDownSources.toSorted((a,b) => b.date.localeCompare(a.date)).filter(x=>x.visible).map(x => {
             return (
               <Grid
                 key={x.id}
-                sx={(theme) => ({
-                  width: "50%",
-                  display: "flex",
-                  flexWrap: "wrap",
-                  direction: "column",
-                  [theme.breakpoints.down('md')]: {
-                    width: "100%",
-                  }
-                })}
+                xs={12}
+                sm={6}
               >
                 <motion.div
                   key={x.id}
