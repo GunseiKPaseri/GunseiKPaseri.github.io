@@ -80,9 +80,10 @@ export type Source = {
   link?: LinkDetail[],
   img?: string,
   tag: ContentsTag[],
+  visible: boolean,
 };
 
-type SourceOmited = Omit<Source, 'id' | 'tag' | 'link'>
+type SourceOmited = Omit<Source, 'id' | 'tag' | 'link' | 'visible'>
   & {
     tag: ContentsTagManual[]
     link?: (string | LinkDetail)[]
@@ -236,6 +237,7 @@ export const sources = sourcesOrigin.map((s, i): Source => {
     ...s,
     tag,
     link,
+    visible: true,
     id: i
   } satisfies Source)
 });
