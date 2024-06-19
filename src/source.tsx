@@ -1,18 +1,21 @@
 import {
   SiBun as BunIcon,
+  SiCodesandbox as CodesandboxIcon,
+  SiCodepen as CodepenIcon,
   SiDeno as DenoIcon,
   SiDocker as DockerIcon,
   SiGithub as GitHubIcon,
   SiJavascript as JavaScriptIcon,
   SiJquery as JqueryIcon,
   SiJsr as JsrIcon,
+  SiMinio as MinIOIcon,
   SiMui as MuiIcon,
   SiNodedotjs as NodeIcon,
   SiNpm as NpmIcon,
   SiPython as PythonIcon,
   SiReact as ReactIcon,
-  SiCodepen as CodepenIcon,
-  SiCodesandbox as CodesandboxIcon,
+  SiRedux as ReduxIcon,
+  SiTypescript as TypeScriptIcon,
   SiZenn as ZennIcon,
 } from "react-icons/si";
 import {
@@ -28,12 +31,16 @@ export const contentsTagLogo = {
   'Docker': {logo: {icon: <DockerIcon />, color: '#2496ed'}, type: 'skill', description: 'コンテナ化技術'},
   'JavaScript': {logo: {icon: <JavaScriptIcon />, color: '#f7df1e'}, type: 'skill', description: 'Webプログラミング言語'},
   'jQuery': {logo: {icon: <JqueryIcon />, color: '#0865a7'}, type: 'skill', description: 'DOM操作ライブラリ'},
+  'minIO': {logo: {icon: <MinIOIcon />, color: '#c72745'}, type: 'skill', description: 'オブジェクトストレージサーバ'},
   'MUI': {logo: {icon: <MuiIcon />, color: '#0081cb'}, type: 'skill', description: 'UIコンポーネントライブラリ'},
   'Node.js': {logo: {icon: <NodeIcon />, color: '#68a063'}, type: 'skill', description: 'JavaScriptランタイム'},
   'Python': {logo: {icon: <PythonIcon />, color: '#306998'}, type: 'skill', description: '汎用プログラミング言語'}, 
   'React': {logo: {icon: <ReactIcon />, color: '#61dafb'}, type: 'skill', description: 'UI開発ライブラリ'},
+  'Redux': {logo: {icon: <ReduxIcon />, color: '#764abc'}, type: 'skill', description: 'React用状態管理ライブラリ'},
   'Peg.js/Peggy': {type: 'skill', description: 'パーサージェネレーター'},
   'SQL': {type: 'skill', description: 'DB操作'},
+  'TextAliveAppAPI': {type: 'skill', description: '歌詞連動アニメーションAPI'},
+  'TypeScript': {logo: {icon: <TypeScriptIcon />, color: '#3178c6'}, type: 'skill', description: 'JavaScriptの型付け拡張'},
   '構文解析': {type: 'skill', description: 'テキストの構造化'},
   '画像処理': {type: 'skill', description: ''},
   'アプリ': {type: 'genre', description: ''},
@@ -98,9 +105,11 @@ export type Source = {
   img?: string,
   tag: ContentsTag[],
   visible: boolean,
+  recent: boolean,
+  score?: 0 | 1 | 2 | 3 | 4 | 5,
 };
 
-type SourceOmited = Omit<Source, 'id' | 'tag' | 'link' | 'visible'>
+type SourceOmited = Omit<Source, 'id' | 'tag' | 'link' | 'visible' | 'recent'>
   & {
     tag: ContentsTagManual[]
     link?: (string | LinkDetail)[]
@@ -119,8 +128,9 @@ iniのパースを行う際、改行・タグ・空白文字を無視するこ�
       'https://github.com/GunseiKPaseri/perfect-ini-parser',
       'https://zenn.dev/gunseikpaseri/articles/parser-published-jsr',
     ],
-    tag: ['Deno', '個人開発', '自分用', 'JavaScript', '構文解析', 'Chevrotain', 'モジュール'],
+    tag: ['Deno', '個人開発', '自分用', 'JavaScript', 'TypeScript', '構文解析', 'Chevrotain', 'モジュール'],
     date: '2024-06-01',
+    score: 2,
   },
   {
     title: 'perfect-json-parser',
@@ -134,8 +144,9 @@ JSONのパースを行う際、改行・タグ・空白文字を無視するこ�
       'https://github.com/GunseiKPaseri/perfect-json-parser',
       'https://zenn.dev/gunseikpaseri/articles/parser-published-jsr',
     ],
-    tag: ['Deno', '個人開発', '自分用', 'JavaScript', '構文解析', 'Chevrotain', 'モジュール'],
+    tag: ['Deno', '個人開発', '自分用', 'JavaScript', 'TypeScript', '構文解析', 'Chevrotain', 'モジュール'],
     date: '2024-06-01',
+    score: 2,
   },
   {
     title: 'E2EENCLOUD（仮称）',
@@ -159,9 +170,10 @@ FIDO2やTOTP等の多要素認証に対応。
       },
       'https://github.com/GunseiKPaseri/e2eencloud',
     ],
-    tag: ['React', '個人開発', 'コンテスト向け', 'Deno', 'Node.js', 'JavaScript', 'Docker', 'SQL', 'MUI', 'アプリ'],
+    tag: ['React', 'Redux', '個人開発', 'コンテスト向け', 'Deno', 'Node.js', 'JavaScript', 'TypeScript', 'Docker', 'minIO', 'SQL', 'MUI', 'アプリ'],
     img: './e2eencloud.png',
     date: '2023-08-12',
+    score: 4,
   },
   {
     title: 'LyricTyper',
@@ -176,8 +188,9 @@ FIDO2やTOTP等の多要素認証に対応。
       }
     ],
     img: './lyrictyper.png',
-    tag: ['個人開発', 'コンテスト向け', 'Node.js', 'JavaScript', 'アプリ'],
+    tag: ['個人開発', 'コンテスト向け', 'Node.js', 'JavaScript', 'TypeScript', 'TextAliveAppAPI', 'アプリ'],
     date: '2020-09-18',
+    score: 4,
   },
   {
     title: 'react-window-system',
@@ -190,8 +203,9 @@ FIDO2やTOTP等の多要素認証に対応。
       'https://www.npmjs.com/package/react-window-system',
     ],
     img: './react-window-system.png',
-    tag: ['個人開発', '自分用', 'Bun', 'React', 'JavaScript', 'モジュール'],
+    tag: ['個人開発', '自分用', 'Bun', 'React', 'JavaScript', 'TypeScript', 'モジュール'],
     date: '2024-02-05',
+    score: 3,
   },
   {
     title: 'promise_array_parallel',
@@ -202,8 +216,9 @@ FIDO2やTOTP等の多要素認証に対応。
       'https://www.npmjs.com/package/promise_array_parallel',
       'https://deno.land/x/promise_array_parallel'
     ],
-    tag: ['個人開発', '研究用', 'Deno', 'Node.js', 'JavaScript', 'モジュール'],
+    tag: ['個人開発', '研究用', 'Deno', 'Node.js', 'JavaScript', 'TypeScript', 'モジュール'],
     date: '2022-11-01',
+    score: 2,
   },
   {
     title: 'gunseikpaseri.github.io',
@@ -213,8 +228,9 @@ FIDO2やTOTP等の多要素認証に対応。
       'https://github.com/GunseiKPaseri/gunseikpaseri.github.io',
       'https://gunseikpaseri.github.io/'
     ],
-    tag: ['個人開発', '自分用', 'JavaScript', 'React', 'MUI', 'アプリ'],
+    tag: ['個人開発', '自分用', 'JavaScript', 'TypeScript', 'React', 'MUI', 'アプリ'],
     date: '2023-05-15',
+    score: 2,
   },
   {
     title: 'deno-session',
@@ -224,7 +240,7 @@ FIDO2やTOTP等の多要素認証に対応。
       'https://github.com/GunseiKPaseri/deno-session',
       'https://zenn.dev/gunseikpaseri/articles/deno-session-third-pirty',
     ],
-    tag: ['個人開発', '自分用', 'Deno', 'JavaScript', 'モジュール'],
+    tag: ['個人開発', '自分用', 'Deno', 'TypeScript', 'JavaScript', 'モジュール'],
     date: '2022-01-08',
   },
   {
@@ -233,8 +249,9 @@ FIDO2やTOTP等の多要素認証に対応。
     description: '点字でプログラムする難解プログラミング言語。[fizzbuzzを解くソースコードの例](https://github.com/GunseiKPaseri/tenjijs/blob/main/example_fizzbuzz2.tj)はこのようになっており、非常に読み取りずらい。[PEG.js](https://pegjs.org/)・[escodegen](https://github.com/estools/escodegen)を利用したAltJSで実現。vitestを用いて正常に実行できるかを確認できる。授業課題。文法の解説・プレイグラウンドを作成予定。',
     link: ['https://github.com/GunseiKPaseri/tenjijs'],
     img: './tenjijs.png',
-    tag: ['個人開発', '課題', 'JavaScript', 'esolang', '構文解析', 'Peg.js/Peggy'],
+    tag: ['個人開発', '課題', 'JavaScript', 'TypeScript', 'esolang', '構文解析', 'Peg.js/Peggy'],
     date: '2023-01-07',
+    score: 2,
   },
   {
     title: 'detect-chinese',
@@ -244,7 +261,7 @@ FIDO2やTOTP等の多要素認証に対応。
       'https://github.com/Neos21/detect-chinese',
       'https://www.npmjs.com/package/@neos21/detect-chinese',
     ],
-    tag: ['フォーク・コントリビュート', '自分用', 'JavaScript', 'モジュール'],
+    tag: ['フォーク・コントリビュート', '自分用', 'TypeScript', 'JavaScript', 'モジュール'],
     date: '2022-07-26',
   },
   {
@@ -255,8 +272,9 @@ FIDO2やTOTP等の多要素認証に対応。
       'https://github.com/GunseiKPaseri/imghashjs',
       'https://www.npmjs.com/package/imghashjs',
     ],
-    tag: ['自分用', 'JavaScript', 'モジュール', 'Node.js', '画像処理'],
+    tag: ['自分用', 'JavaScript', 'TypeScript', 'モジュール', 'Node.js', '画像処理'],
     date: '2022-03-13',
+    score: 1,
   },
   {
     title: '俺得拡張機能集',
@@ -265,7 +283,7 @@ FIDO2やTOTP等の多要素認証に対応。
     link: [
       'https://chromewebstore.google.com/detail/%E4%BF%BA%E5%BE%97%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD%E9%9B%86/ikaoaeddhkepbhjbfjjnpghheikmgmda'
     ],
-    tag: ['自分用', 'JavaScript', 'ブラウザ拡張機能', 'jQuery'],
+    tag: ['自分用', 'JavaScript', 'アプリ', 'ブラウザ拡張機能', 'jQuery'],
     date: '2021-08-19'
   },
   {
@@ -277,7 +295,7 @@ FIDO2やTOTP等の多要素認証に対応。
       'https://chromewebstore.google.com/detail/picpickdl/blmeebooelogdcajapgeiooajiphebpp'
     ],
     img: './picpickdl.jpg',
-    tag: ['自分用', 'アプリ', 'JavaScript', 'ブラウザ拡張機能', 'React', 'MUI'],
+    tag: ['自分用', 'アプリ', 'JavaScript', 'TypeScript', 'ブラウザ拡張機能', 'React', 'MUI'],
     date: '2021-09-27',
   },
   {
@@ -287,6 +305,7 @@ FIDO2やTOTP等の多要素認証に対応。
     link: ['https://github.com/GunseiKPaseri/Mery_msy'],
     tag: ['自分用', '設定ファイル'],
     date: '2018-02-08',
+    score: 2,
   },
   {
     title: 'SimpleClock',
@@ -295,7 +314,8 @@ FIDO2やTOTP等の多要素認証に対応。
     link: ['https://github.com/GunseiKPaseri/SimpleClock', 'https://gunseikpaseri.github.io/SimpleClock/'],
     tag: ['自分用', 'アプリ', 'JavaScript', 'jQuery'],
     img: './simpleclock.png',
-    date: '2017-10-07'
+    date: '2017-10-07',
+    score: 1,
   },
   {
     title: 'カスタムbashプロンプト',
@@ -348,12 +368,18 @@ export const sources = sourcesOrigin.map((s, i): Source => {
     ...(link?.some(x => x.type === 'npm') ? ['npm公開中'] as const : []),
     ...(link?.some(x => x.type === 'github') ? ['GitHub公開中'] as const : []),
   ]
+  
+  const date = new Date(s.date)
+  // 半年以内の記事はnewマークを表示
+  const recent = (Date.now() - date.getTime()) < 1000 * 60 * 60 * 24 * 180
+
   return ({
     ...s,
     tag,
     link,
     visible: true,
-    id: i
+    id: i,
+    recent,
   } satisfies Source)
 });
 

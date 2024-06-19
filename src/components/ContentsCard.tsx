@@ -36,13 +36,11 @@ export const ContentsCard = (props: {source: Source}) => {
 
   const date = new Date(props.source.date)
   const dateString = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`
-  // 半年以内の記事はnewマークを表示
-  const recent = (Date.now() - date.getTime()) < 1000 * 60 * 60 * 24 * 180
 
   return (
     <Card sx={{width: "100%"}}>
       <CardContent>
-        <Typography variant="h5" component="div">{recent && <NewBudge />}<Markdown>{props.source.title}</Markdown></Typography>
+        <Typography variant="h5" component="div">{props.source.recent && <NewBudge />}<Markdown>{props.source.title}</Markdown></Typography>
         <Typography variant="body2" color="text.secondary">公開日: {dateString}</Typography>
         <TagList tags={props.source.tag} />
         <Markdown overrides={{p: { component: Typography, props: {color: 'text.secondary'} }}}>{props.source.summary}</Markdown>

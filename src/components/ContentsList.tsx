@@ -1,7 +1,7 @@
 import { useContext, useMemo, useState } from "react";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { ContentsCard } from "./ContentsCard";
-import { sources, type ContentsTag } from "../source";
+import { Source, sources, type ContentsTag } from "../source";
 import { appContext } from "../state/context";
 import { SearchCard } from "./SearchCard";
 import { AnimatePresence, motion } from "framer-motion";
@@ -36,6 +36,19 @@ const findSource = (keyword: string, selectedTags: ContentsTag[]) => {
     }))
 }
 
+const compareSource = (a: Source, b: Source) => {
+  // pick up recent item
+  if(a.recent && !b.recent) return -1;
+  if(!a.recent && b.recent) return 1;
+
+  // compare score
+  if((a.score ?? 0) > (b.score ?? 0)) return -1;
+  if((a.score ?? 0) < (b.score ?? 0)) return 1;
+
+  // compare date
+  return b.date.localeCompare(a.date);
+}
+
 export const ContentsList = () => {
   const context = useContext(appContext);
   const [searchWord, setSearchWord] = useState("");
@@ -51,7 +64,7 @@ export const ContentsList = () => {
         <AnimatePresence mode="popLayout">
         {
 
-          narrowDownSources.toSorted((a,b) => b.date.localeCompare(a.date)).filter(x=>x.visible).map(x => {
+          narrowDownSources.toSorted(compareSource).filter(x=>x.visible).map(x => {
             return (
               <Grid
                 key={x.id}
