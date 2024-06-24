@@ -1,10 +1,11 @@
 import { useContext, useMemo, useState } from "react";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { AnimatePresence, motion } from "framer-motion";
+
 import { ContentsCard } from "./ContentsCard";
 import { Source, sources, type ContentsTag } from "../source";
 import { appContext } from "../state/context";
 import { SearchCard } from "./SearchCard";
-import { AnimatePresence, motion } from "framer-motion";
 
 const reRegExp = /[\\^$.*+?()[\]{}|]/g
 

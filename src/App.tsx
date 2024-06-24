@@ -1,10 +1,11 @@
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
-
-import { ContentsList } from './components/ContentsList.tsx';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
+import { ContentsList } from './components/ContentsList.tsx';
 import './googlefont.css';
 
 function App() {
@@ -70,6 +71,17 @@ function App() {
           </Typography>
         </Paper>
       </Paper>
+      <Card sx={{padding: 2, mb: 2}}>
+        <CardContent>
+          <Typography variant="h4" color="inherit">About Me</Typography>
+          <Typography variant="body1">
+            某大学の情報系学科の院生。小さいころからIT領域に関心があり、趣味でも競技プログラミングやWeb開発に取り組んでいます。成果物はTypeScriptとReactが中心なものの、アルゴリズム・OS・インフラ・クラウド・バックエンド・セキュリティ・AI等幅広い技術領域に関心があります。
+          </Typography>
+          <Typography variant="body1">
+            インターネットに本名を載せていいのかまだ信じられずにいます。
+          </Typography>
+        </CardContent>
+      </Card>
       <ContentsList />
     </Container>
   )
