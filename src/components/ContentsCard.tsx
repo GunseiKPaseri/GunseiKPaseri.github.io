@@ -20,8 +20,8 @@ const NewBudge = () => {
   const theme = useTheme();
   return (
     <Tooltip title="半年以内に公開">
-      <IconButton>
-        <NewReleasesIcon color={theme.palette.primary.light} style={{marginRight: '0.2em'}} />
+      <IconButton style={{marginRight: '0.2em'}}>
+        <NewReleasesIcon color={theme.palette.primary.light} />
       </IconButton>
     </Tooltip>
   )
