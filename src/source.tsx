@@ -5,6 +5,7 @@ import {
   SiDeno as DenoIcon,
   SiDocker as DockerIcon,
   SiGithub as GitHubIcon,
+  SiGo as GoIcon,
   SiJavascript as JavaScriptIcon,
   SiJquery as JqueryIcon,
   SiJsr as JsrIcon,
@@ -13,11 +14,19 @@ import {
   SiNodedotjs as NodeIcon,
   SiNpm as NpmIcon,
   SiPython as PythonIcon,
+  SiRubyonrails as RailsIcon,
   SiReact as ReactIcon,
   SiRedux as ReduxIcon,
+  SiRuby as RubyIcon,
+  SiRust as RustIcon,
   SiTypescript as TypeScriptIcon,
+  SiVim as VimIcon,
+  SiQiita as QiitaIcon,
   SiZenn as ZennIcon,
 } from "react-icons/si";
+import {
+  SlNote as NoteIcon
+} from "react-icons/sl";
 import {
   MdExtension as ExtensionIcon,
 } from "react-icons/md";
@@ -25,24 +34,33 @@ import LinkIcon from '@mui/icons-material/Link';
 import { OmitByValue, PickByValue, entries, keys } from "./util";
 
 export const contentsTagLogo = {
+  'axum': {type: 'skill', description: 'RustWebフレームワーク'},
+  'bash': {type: 'skill', description: 'シェルスクリプト言語'},
   'Bun': {logo: {icon: <BunIcon />, color: '#f3e8b8'}, type: 'skill', description: 'JavaScriptランタイム'},
   'Chevrotain': {type: 'skill', description: 'パーサービルダー'},
   'Deno': {logo: {icon: <DenoIcon />, color: '#000000'}, type: 'skill', description: 'JavaScriptランタイム'},
   'Docker': {logo: {icon: <DockerIcon />, color: '#2496ed'}, type: 'skill', description: 'コンテナ化技術'},
+  'Go': {logo: {icon: <GoIcon />, color: '#00acd7'}, type: 'skill', description: 'システムプログラミング言語'},
   'JavaScript': {logo: {icon: <JavaScriptIcon />, color: '#f7df1e'}, type: 'skill', description: 'Webプログラミング言語'},
   'jQuery': {logo: {icon: <JqueryIcon />, color: '#0865a7'}, type: 'skill', description: 'DOM操作ライブラリ'},
   'minIO': {logo: {icon: <MinIOIcon />, color: '#c72745'}, type: 'skill', description: 'オブジェクトストレージサーバ'},
   'MUI': {logo: {icon: <MuiIcon />, color: '#0081cb'}, type: 'skill', description: 'UIコンポーネントライブラリ'},
   'Node.js': {logo: {icon: <NodeIcon />, color: '#68a063'}, type: 'skill', description: 'JavaScriptランタイム'},
   'Python': {logo: {icon: <PythonIcon />, color: '#306998'}, type: 'skill', description: '汎用プログラミング言語'}, 
+  'Rails': {logo: {icon: <RailsIcon />, color: '#cc0000'}, type: 'skill', description: 'Ruby用Webフレームワーク'},
   'React': {logo: {icon: <ReactIcon />, color: '#61dafb'}, type: 'skill', description: 'UI開発ライブラリ'},
   'Redux': {logo: {icon: <ReduxIcon />, color: '#764abc'}, type: 'skill', description: 'React用状態管理ライブラリ'},
+  'Ruby': {logo: {icon: <RubyIcon />, color: '#cc342d'}, type: 'skill', description: '汎用プログラミング言語'},
+  'Rust': {logo: {icon: <RustIcon />, color: '#000000'}, type: 'skill', description: 'システムプログラミング言語'},
   'Peg.js/Peggy': {type: 'skill', description: 'パーサージェネレーター'},
   'SQL': {type: 'skill', description: 'DB操作'},
+  'vim': {logo: {icon: <VimIcon />, color: '#019733'}, type: 'skill', description: 'テキストエディタ'},
+  'zsh': {type: 'skill', description: 'シェルスクリプト言語'},
   'TextAliveAppAPI': {type: 'skill', description: '歌詞連動アニメーションAPI'},
   'TypeScript': {logo: {icon: <TypeScriptIcon />, color: '#3178c6'}, type: 'skill', description: 'JavaScriptの型付け拡張'},
   '構文解析': {type: 'skill', description: 'テキストの構造化'},
   '画像処理': {type: 'skill', description: ''},
+  '並列処理': {type: 'skill', description: ''},
   'アプリ': {type: 'genre', description: ''},
   'モジュール': {type: 'genre', description: 'アプリに組み込む頒布可能な状態の部分要素'},
   'CUIツール': {type: 'genre', description: ''},
@@ -50,16 +68,18 @@ export const contentsTagLogo = {
   '設定ファイル': {type: 'genre', description: ''},
   'ブラウザ拡張機能': {type: 'genre', description: ''},
   'esolang': {type: 'genre', description: '難解プログラミング言語'},
+  'インターン': {type: 'state', description: ''},
   '課題': {type: 'state', description: ''},
   '研究用': {type: 'state', description: ''},
   '自分用': {type: 'state', description: ''},
   'コンテスト向け': {type: 'state', description: ''},
   '個人開発': {type: 'state', description: ''},
+  'チーム開発': {type: 'state', description: ''},
   'フォーク・コントリビュート': {type: 'state', description: ''},
-  'jsr公開中': {logo: {icon: <JsrIcon />, color: '#f3e8b8'}, type: 'auto', description: 'パッケージ配布中'},
-  'npm公開中': {logo: {icon: <NpmIcon />, color: '#cb3837'}, type: 'auto', description: 'パッケージ配布中'},
-  'deno/x公開中': {logo: {icon: <DenoIcon />, color: '#000000'}, type: 'auto', description: 'パッケージ配布中'},
-  'GitHub公開中': {logo: {icon: <GitHubIcon />, color: '#181717'}, type: 'auto', description: 'リポジトリ公開中'},
+  'パッケージ配布有': {logo: {icon: <NpmIcon />, color: '#cb3837'}, type: 'auto', description: 'deno/x・jsr・npmを経由して利用可能'},
+  'リポジトリ有': {logo: {icon: <GitHubIcon />, color: '#181717'}, type: 'auto', description: 'リポジトリ公開中'},
+  '記事有': {logo: {icon: <NoteIcon />, color: '#000000'}, type: 'auto', description: '記事公開中'},
+  'デモ有': {logo: {icon: <CodepenIcon />, color: '#000000'}, type: 'auto', description: 'デモ公開中'},
 } as const satisfies Record<string, {
   logo?:{icon: JSX.Element, color: string},
   type: 'skill' | 'auto' | 'state' | 'genre',
@@ -79,14 +99,16 @@ export const contentsTagsTree = {
 } as const satisfies Record<string, ContentsTag[]>;
 
 export const linkTypes = {
-  jsr: {message: 'jsr', icon: <JsrIcon />, title: 'JSR', domain:['jsr.io']},
-  github: {message: '実装', icon: <GitHubIcon />, title: 'GitHub', domain:['github.com']},
-  npm: {message: 'npm', icon: <NpmIcon />, title: 'npm package', domain: ['npmjs.com']},
   deno: {message: 'deno/x', icon: <DenoIcon />, title: 'deno.land/x', domain: ['deno.land']},
+  jsr: {message: 'jsr', icon: <JsrIcon />, title: 'JSR', domain:['jsr.io']},
+  npm: {message: 'npm', icon: <NpmIcon />, title: 'npm package', domain: ['npmjs.com']},
+  extension: {message: '導入', icon: <ExtensionIcon />, title: 'ブラウザ拡張機能', domain: ['chromewebstore.google.com']},
+  github: {message: '実装', icon: <GitHubIcon />, title: 'GitHub', domain:['github.com']},
+  note: {message: '記事', icon: <NoteIcon />, title: 'Note', domain: ['note.com']},
+  qiita: {message: '記事', icon: <QiitaIcon />, title: 'Qiita', domain: ['qiita.com']},
   zenn: {message: '記事', icon: <ZennIcon />, title: 'Zenn', domain: ['zenn.dev']},
   codepen: {message: 'デモ', icon: <CodepenIcon />, title: 'CodePen', domain: ['codepen.io']},
   codesandbox: {message: 'デモ', icon: <CodesandboxIcon />, title: 'CodeSandbox', domain: ['codesandbox.io']},
-  extension: {message: '導入', icon: <ExtensionIcon />, title: 'ブラウザ拡張機能', domain: ['chromewebstore.google.com']},
   other: {message: 'リンク', icon: <LinkIcon />, title: 'リンク', domain: []},
 } as const satisfies Record<string, {message: string, icon: JSX.Element, title: string, domain: string[]}>;
 
@@ -116,6 +138,33 @@ type SourceOmited = Omit<Source, 'id' | 'tag' | 'link' | 'visible' | 'recent'>
   }
 
 const sourcesOrigin: SourceOmited[] = [
+  {
+    title: 'PKSHA Technology インターン選考',
+    summary: 'PKSHA Technology インターン選考',
+    description: 'PKSHA Technology インターン選考に参加しました。Maasチームの一員として、旧システムのリプレイス業務に参加しました。',
+    date: '2023-12-31',
+    tag: ['インターン', 'Go'],
+    score: 1,
+  },
+  {
+    title: 'freee株式会社サマーインターン',
+    summary: 'フロントエンド・バックエンドエンジニア(2週間)',
+    description: 'メンターと共に新規機能の実装に取り組んだ。',
+    date: '2021-08-31',
+    tag: ['インターン', 'Ruby','Rails','React', '個人開発'],
+    score: 1,
+  },
+  {
+    title: 'ゆめみ2023夏インターン',
+    summary: '2023サーバサイドエンジニア(2週間)',
+    description: 'ゆめみのサマーインターンに参加しました。ほぼ初Rust、初Macという初めてだらけの環境でしたが、何とかへばりついてやっていけました。',
+    date: '2023-09-09',
+    tag: ['インターン', 'Rust', 'axum', 'チーム開発'],
+    link: [
+      'https://note.com/gunseikpaseri/n/n4276746bf6b2'
+    ],
+    score: 1,
+  },
   {
     title: 'perfect-ini-parser',
     summary: '空白付INIパーサー',
@@ -208,6 +257,17 @@ FIDO2やTOTP等の多要素認証に対応。
     score: 3,
   },
   {
+    title: 'TRIMMER',
+    summary: '簡易テキスト余白・改行除去ツール',
+    description: 'PDFからコピペしたいとき、余分な改行・スペースと思しきものを自動で除去してくれる簡易的なツール。',
+    link: [
+      'https://codepen.io/GunseiKPaseri/full/WNdBoQe',
+    ],
+    tag: ['個人開発', '自分用', 'JavaScript', 'アプリ'],
+    date: '2021-12-31',
+    score: 3,
+  },
+  {
     title: 'promise_array_parallel',
     summary: '簡易並列処理ライブラリ',
     description: '与えられた複数の非同期関数について、完了後に並列数を制限しながら別の非同期関数を実行する等を簡易的に実現する。JavaScript標準のPromise.all等と使い心地が揃うようにしている。またGitHubActionを利用し、GitHub経由でリリースするとnpm及びdeno.landにおいて自動で公開されるようになっており、Node.js・Deno両環境で使うことができる。研究の際に欲しかった機能を改めてパッケージ化。',
@@ -216,7 +276,7 @@ FIDO2やTOTP等の多要素認証に対応。
       'https://www.npmjs.com/package/promise_array_parallel',
       'https://deno.land/x/promise_array_parallel'
     ],
-    tag: ['個人開発', '研究用', 'Deno', 'Node.js', 'JavaScript', 'TypeScript', 'モジュール'],
+    tag: ['個人開発', '研究用', 'Deno', 'Node.js', 'JavaScript', 'TypeScript', 'モジュール', '並列処理'],
     date: '2022-11-01',
     score: 2,
   },
@@ -322,7 +382,7 @@ FIDO2やTOTP等の多要素認証に対応。
     summary: '自作のパンくずリスト型表示',
     description: 'bashのプロンプトを自作しました。パンくずリスト型でディレクトリ情報・git情報・pyenv等を表示します。現在は[starship](https://starship.rs/ja-JP/)を利用しているので使用していないです。',
     link: ['https://qiita.com/GunseiKPaseri/items/e594c8e261905e3d0281'],
-    tag: ['自分用', 'スクリプト'],
+    tag: ['自分用', 'bash', 'スクリプト'],
     date: '2020-09-17'
   },
   {
@@ -337,7 +397,7 @@ FIDO2やTOTP等の多要素認証に対応。
     title: '.dotfiles',
     summary: '個人設定ファイル',
     description: '自分用の設定ファイルをまとめたリポジトリ。zshrc・vimrc・tmux.conf等が含まれる。',
-    tag: ['自分用', '設定ファイル'],
+    tag: ['自分用', 'vim', 'zsh', '設定ファイル', 'スクリプト'],
     link: ['https://github.com/GunseiKPaseri/.dotfiles'],
     date: '2023-01-21'
   },
@@ -363,10 +423,10 @@ export const sources = sourcesOrigin.map((s, i): Source => {
   const link: Source['link'] = s.link?.map(x => typeof x === 'string' ? linkDetailSuggester(x) : x)
   const tag: Source['tag'] = [
     ...s.tag,
-    ...(link?.some(x => x.type === 'deno') ? ['deno/x公開中'] as const : []),
-    ...(link?.some(x => x.type === 'jsr') ? ['jsr公開中'] as const : []),
-    ...(link?.some(x => x.type === 'npm') ? ['npm公開中'] as const : []),
-    ...(link?.some(x => x.type === 'github') ? ['GitHub公開中'] as const : []),
+    ...(link?.some(x => x.type === 'deno' || x.type === 'jsr' || x.type === 'npm') ? ['パッケージ配布有'] as const : []),
+    ...(link?.some(x => x.type === 'github') ? ['リポジトリ有'] as const : []),
+    ...(link?.some(x => x.type === 'note' || x.type === 'qiita' || x.type === 'zenn') ? ['記事有'] as const : []),
+    ...(link?.some(x => x.type === 'codepen' || x.type === 'codesandbox') ? ['デモ有'] as const : []),
   ]
   
   const date = new Date(s.date)

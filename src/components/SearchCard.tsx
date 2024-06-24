@@ -1,8 +1,5 @@
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
-import { sources,  contentsTagsTree, type Source } from "../source";
-import { TagList } from "./TagList";
-import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
@@ -10,7 +7,10 @@ import { ExpandMore } from "./util/ExpandMore";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SearchIcon from '@mui/icons-material/Search';
 import Collapse from "@mui/material/Collapse";
-import { Stack } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import { sources,  contentsTagsTree, type Source } from "../source";
+import { TagList } from "./TagList";
+import { SearchField } from "./util/SearchField";
 
 export function SearchCard(props: {
   searchWord: string,
@@ -25,12 +25,12 @@ export function SearchCard(props: {
   return (
     <Card sx={{padding: 2, mb: 2}}>
       <CardContent>
-        <Typography variant="h4" color="inherit"><SearchIcon />検索</Typography>
+        <Typography variant="h5" color="inherit"><SearchIcon />検索</Typography>
       </CardContent>
       <CardActions disableSpacing>
         <Stack spacing={1} direction="row">
           <Typography variant="body1" sx={{mt: 1}}>
-            全<strong>{narrowDownSources.length}</strong>/{sources.length}件
+            全<strong>{narrowDownSources.filter(x=>x.visible).length}</strong>/{sources.length}件
           </Typography>
         </Stack>
         <ExpandMore
@@ -43,13 +43,7 @@ export function SearchCard(props: {
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit sx={{p: 1}}>
-        <Typography variant="h5" color="inherit">キーワード</Typography>
-        <TextField
-          variant="standard"
-          value={searchWord}
-          onChange={(e) => setSearchWord(e.target.value)}
-          sx={{width: '80%'}}
-          placeholder="ここに検索ワードを入力" />
+        <SearchField value={searchWord} label="検索ワード" onChange={setSearchWord} onClear={() => setSearchWord("")} />
         <Typography variant="h5" color="inherit" sx={{mt: 2}}>タグ</Typography>
         <Typography variant="h6" color="inherit" sx={{mt: 2}}>技術</Typography>
         <TagList tags={contentsTagsTree['技術']} />
