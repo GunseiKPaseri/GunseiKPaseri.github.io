@@ -23,6 +23,7 @@ import {
   SiVim as VimIcon,
   SiQiita as QiitaIcon,
   SiZenn as ZennIcon,
+  SiZsh as ZshIcon,
 } from "react-icons/si";
 import {
   SlNote as NoteIcon
@@ -36,7 +37,7 @@ import { OmitByValue, PickByValue, entries, keys } from "./util";
 export const contentsTagLogo = {
   'axum': {type: 'skill', description: 'RustWebフレームワーク'},
   'bash': {type: 'skill', description: 'シェルスクリプト言語'},
-  'Bun': {logo: {icon: <BunIcon />, color: '#f3e8b8'}, type: 'skill', description: 'JavaScriptランタイム'},
+  'Bun': {logo: {icon: <BunIcon />, color: '#f3e8b8', backgroundColor: '#000'}, type: 'skill', description: 'JavaScriptランタイム'},
   'Chevrotain': {type: 'skill', description: 'パーサービルダー'},
   'Deno': {logo: {icon: <DenoIcon />, color: '#000000'}, type: 'skill', description: 'JavaScriptランタイム'},
   'Docker': {logo: {icon: <DockerIcon />, color: '#2496ed'}, type: 'skill', description: 'コンテナ化技術'},
@@ -55,7 +56,7 @@ export const contentsTagLogo = {
   'Peg.js/Peggy': {type: 'skill', description: 'パーサージェネレーター'},
   'SQL': {type: 'skill', description: 'DB操作'},
   'vim': {logo: {icon: <VimIcon />, color: '#019733'}, type: 'skill', description: 'テキストエディタ'},
-  'zsh': {type: 'skill', description: 'シェルスクリプト言語'},
+  'zsh': {logo: {icon: <ZshIcon />, color: '#e84e0e'}, type: 'skill', description: 'シェルスクリプト言語'},
   'TextAliveAppAPI': {type: 'skill', description: '歌詞連動アニメーションAPI'},
   'TypeScript': {logo: {icon: <TypeScriptIcon />, color: '#3178c6'}, type: 'skill', description: 'JavaScriptの型付け拡張'},
   '構文解析': {type: 'skill', description: 'テキストの構造化'},
@@ -81,7 +82,7 @@ export const contentsTagLogo = {
   '記事有': {logo: {icon: <NoteIcon />, color: '#000000'}, type: 'auto', description: '記事公開中'},
   'デモ有': {logo: {icon: <CodepenIcon />, color: '#000000'}, type: 'auto', description: 'デモ公開中'},
 } as const satisfies Record<string, {
-  logo?:{icon: JSX.Element, color: string},
+  logo?:{icon: JSX.Element, color: string, backgroundColor?: string},
   type: 'skill' | 'auto' | 'state' | 'genre',
   description: string
 }>
