@@ -6,8 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "fmt": "npx @biomejs/biome check --write ./src vite.config.ts tsconfig.json tsconfig.node.json README.md eslint.config.js package.json package-lock.json index.html",
     "visualizer": "vite-bundle-visualizer",
     "lint": "eslint src/**/*.{ts,tsx} --report-unused-disable-directives --max-warnings 0",
+    "pre-commit": "npm run fmt && npm run lint",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -22,6 +24,7 @@
     "react-icons": "^5.2.1"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.8.2",
     "@eslint/js": "^9.5.0",
     "@types/eslint__js": "^8.42.3",
     "@types/node": "^20.14.8",
