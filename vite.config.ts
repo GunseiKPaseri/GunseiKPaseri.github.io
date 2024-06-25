@@ -6,4 +6,13 @@ export default defineConfig({
   plugins: [
     react()
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          framer: ['framer-motion']
+        }
+      }
+    }
+  }
 })

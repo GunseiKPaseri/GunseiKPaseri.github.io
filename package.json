@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "visualizer": "vite-bundle-visualizer",
     "lint": "eslint src/**/*.{ts,tsx} --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -32,6 +33,7 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "typescript": "^5.5.2",
     "typescript-eslint": "^7.14.1",
-    "vite": "^5.3.1"
+    "vite": "^5.3.1",
+    "vite-bundle-visualizer": "^1.2.1"
   }
 }
