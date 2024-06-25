@@ -3,7 +3,7 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { ContentsCard } from "./ContentsCard";
-import { Source, sources, type ContentsTag } from "../source";
+import { Source, contentsTags, sources, type ContentsTag } from "../source";
 import { appContext } from "../state/context";
 import { SearchCard } from "./SearchCard";
 
@@ -23,6 +23,7 @@ const findSource = (keyword: string, selectedTags: ContentsTag[]) => {
   const normalizedKeyword = normalize(keyword);
   if (keyword === "") return filteredSource;
   const rg = normalizeMarkRegExp(keyword)
+  const matchedTags = new Set(contentsTags.filter(x => normalize(x).includes(normalizedKeyword)))
   return filteredSource
     .map(x=>({
       ...x,
@@ -33,6 +34,7 @@ const findSource = (keyword: string, selectedTags: ContentsTag[]) => {
         normalize(x.title).includes(normalizedKeyword)
         || normalize(x.summary).includes(normalizedKeyword)
         || normalize(x.description).includes(normalizedKeyword)
+        || x.tag.some((t: ContentsTag) => matchedTags.has(t))
       )
     }))
 }
