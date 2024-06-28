@@ -2,8 +2,8 @@ import Button from "@mui/material/Button"
 import IconButton from "@mui/material/IconButton"
 import Tooltip from "@mui/material/Tooltip"
 
-import { type Source, linkTypes } from "../source"
-import { useWindowSize } from "../util"
+import { type Source, linkTypes } from "../../source"
+import { useWindowSize } from "../../util"
 
 export const CardLinkButton = (props: {
   link: NonNullable<Source["link"]>[number]

@@ -5,8 +5,12 @@ import Box from "@mui/material/Box"
 import Tooltip from "@mui/material/Tooltip"
 import { useTheme } from "@mui/material/styles"
 
-import { type ContentsTag, contentsTagCount, contentsTagLogo } from "../source"
-import { appContext, tagClick } from "../state/context"
+import {
+  type ContentsTag,
+  contentsTagCount,
+  contentsTagLogo,
+} from "../../source"
+import { appContext, tagClick } from "../../state/context"
 
 const FixedChipIcon = (props: { children: React.ReactNode }) => (
   <Box sx={{ ml: "0.5ex", position: "relative", top: "0.35ex", left: "0.1ex" }}>

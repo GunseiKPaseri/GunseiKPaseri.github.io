@@ -2,9 +2,9 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2"
 import { AnimatePresence, motion } from "framer-motion"
 import { useContext, useMemo, useState } from "react"
 
-import { type ContentsTag, Source, contentsTags, sources } from "../source"
-import { appContext } from "../state/context"
-import { ContentsCard } from "./ContentsCard"
+import { type ContentsTag, contentsTags, sources } from "../../source"
+import { appContext } from "../../state/context"
+import { ContentsCard } from "../molecules/ContentsCard"
 import { SearchCard } from "./SearchCard"
 
 const reRegExp = /[\\^$.*+?()[\]{}|]/g
@@ -41,19 +41,6 @@ const findSource = (keyword: string, selectedTags: ContentsTag[]) => {
   }))
 }
 
-const compareSource = (a: Source, b: Source) => {
-  // pick up recent item
-  if (a.recent && !b.recent) return -1
-  if (!a.recent && b.recent) return 1
-
-  // compare score
-  if ((a.score ?? 0) > (b.score ?? 0)) return -1
-  if ((a.score ?? 0) < (b.score ?? 0)) return 1
-
-  // compare date
-  return b.date.localeCompare(a.date)
-}
-
 export const ContentsList = () => {
   const context = useContext(appContext)
   const [searchWord, setSearchWord] = useState("")
@@ -72,7 +59,6 @@ export const ContentsList = () => {
       <Grid container spacing={2}>
         <AnimatePresence mode="popLayout">
           {narrowDownSources
-            .toSorted(compareSource)
             .filter((x) => x.visible)
             .map((x) => {
               return (

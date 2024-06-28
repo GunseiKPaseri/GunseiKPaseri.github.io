@@ -7,10 +7,10 @@ import Collapse from "@mui/material/Collapse"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import { useState } from "react"
-import { type Source, contentsTagsTree, sources } from "../source"
-import { TagList } from "./TagList"
-import { ExpandMore } from "./util/ExpandMore"
-import { SearchField } from "./util/SearchField"
+import { type Source, contentsTagsTree, sources } from "../../source"
+import { SearchField } from "../atom/SearchField"
+import { TagList } from "../molecules/TagList"
+import { ExpandMore } from "../util/ExpandMore"
 
 export function SearchCard(props: {
   searchWord: string

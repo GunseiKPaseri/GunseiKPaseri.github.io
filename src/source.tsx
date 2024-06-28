@@ -698,43 +698,58 @@ const linkDetailSuggester = (url: string): LinkDetail => {
   return { url, type: "other" }
 }
 
-export const sources = sourcesOrigin.map((s, i): Source => {
-  const link: Source["link"] = s.link?.map((x) =>
-    typeof x === "string" ? linkDetailSuggester(x) : x,
-  )
-  const tag: Source["tag"] = [
-    ...s.tag,
-    ...(link?.some(
-      (x) => x.type === "deno" || x.type === "jsr" || x.type === "npm",
-    )
-      ? (["パッケージ配布有"] as const)
-      : []),
-    ...(link?.some((x) => x.type === "github")
-      ? (["リポジトリ有"] as const)
-      : []),
-    ...(link?.some(
-      (x) => x.type === "note" || x.type === "qiita" || x.type === "zenn",
-    )
-      ? (["記事有"] as const)
-      : []),
-    ...(link?.some((x) => x.type === "codepen" || x.type === "codesandbox")
-      ? (["デモ有"] as const)
-      : []),
-  ]
+const compareSource = (a: Source, b: Source) => {
+  // pick up recent item
+  if (a.recent && !b.recent) return -1
+  if (!a.recent && b.recent) return 1
 
-  const date = new Date(s.date)
-  // 半年以内の記事はnewマークを表示
-  const recent = Date.now() - date.getTime() < 1000 * 60 * 60 * 24 * 180
+  // compare score
+  if ((a.score ?? 0) > (b.score ?? 0)) return -1
+  if ((a.score ?? 0) < (b.score ?? 0)) return 1
 
-  return {
-    ...s,
-    tag,
-    link,
-    visible: true,
-    id: i,
-    recent,
-  } satisfies Source
-})
+  // compare date
+  return b.date.localeCompare(a.date)
+}
+
+export const sources = sourcesOrigin
+  .map((s, i): Source => {
+    const link: Source["link"] = s.link?.map((x) =>
+      typeof x === "string" ? linkDetailSuggester(x) : x,
+    )
+    const tag: Source["tag"] = [
+      ...s.tag,
+      ...(link?.some(
+        (x) => x.type === "deno" || x.type === "jsr" || x.type === "npm",
+      )
+        ? (["パッケージ配布有"] as const)
+        : []),
+      ...(link?.some((x) => x.type === "github")
+        ? (["リポジトリ有"] as const)
+        : []),
+      ...(link?.some(
+        (x) => x.type === "note" || x.type === "qiita" || x.type === "zenn",
+      )
+        ? (["記事有"] as const)
+        : []),
+      ...(link?.some((x) => x.type === "codepen" || x.type === "codesandbox")
+        ? (["デモ有"] as const)
+        : []),
+    ]
+
+    const date = new Date(s.date)
+    // 半年以内の記事はnewマークを表示
+    const recent = Date.now() - date.getTime() < 1000 * 60 * 60 * 24 * 180
+
+    return {
+      ...s,
+      tag,
+      link,
+      visible: true,
+      id: i,
+      recent,
+    } satisfies Source
+  })
+  .toSorted(compareSource)
 
 const sourcesValue = Object.values(sources)
 export const contentsTagCount = Object.fromEntries(

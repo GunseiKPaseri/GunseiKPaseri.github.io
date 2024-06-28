@@ -1,33 +1,20 @@
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
 import CardActions from "@mui/material/CardActions"
 import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
 import Collapse from "@mui/material/Collapse"
-import IconButton from "@mui/material/IconButton"
 import Stack from "@mui/material/Stack"
-import Tooltip from "@mui/material/Tooltip"
 import Typography from "@mui/material/Typography"
-import { useTheme } from "@mui/material/styles"
 import { useState } from "react"
-import { MdNewReleases as NewReleasesIcon } from "react-icons/md"
 
-import { type Source } from "../source.ts"
-import { CardLinkButton } from "./CardLinkButton.tsx"
-import { Markdown } from "./Markdown.tsx"
+import { type Source } from "../../source.tsx"
+import { CardLinkButton } from "../atom/CardLinkButton.tsx"
+import { Markdown } from "../atom/Markdown.tsx"
+import { NewBudge } from "../atom/NewBudge.tsx"
+import { ExpandMore } from "../util/ExpandMore.tsx"
 import { TagList } from "./TagList.tsx"
-import { ExpandMore } from "./util/ExpandMore.tsx"
-
-const NewBudge = () => {
-  const theme = useTheme()
-  return (
-    <Tooltip title="半年以内に公開">
-      <IconButton style={{ marginRight: "0.2em" }}>
-        <NewReleasesIcon color={theme.palette.primary.light} />
-      </IconButton>
-    </Tooltip>
-  )
-}
 
 export const ContentsCard = (props: { source: Source }) => {
   const [expanded, setExpanded] = useState(false)
@@ -49,7 +36,6 @@ export const ContentsCard = (props: { source: Source }) => {
         <Typography variant="body2" color="text.secondary">
           公開日: {dateString}
         </Typography>
-        <TagList tags={props.source.tag} />
         <Markdown
           overrides={{
             p: { component: Typography, props: { color: "text.secondary" } },
@@ -85,7 +71,12 @@ export const ContentsCard = (props: { source: Source }) => {
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit sx={{ p: 1 }}>
-        <Markdown>{props.source.description}</Markdown>
+        <Box sx={{ p: 1, pt: 0 }}>
+          <TagList tags={props.source.tag} />
+        </Box>
+        <Box sx={{ p: 1 }}>
+          <Markdown>{props.source.description}</Markdown>
+        </Box>
       </Collapse>
     </Card>
   )
