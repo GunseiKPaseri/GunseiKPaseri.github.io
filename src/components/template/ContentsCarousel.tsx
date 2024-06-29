@@ -13,7 +13,7 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import { Link } from "react-router-dom"
 import { Autoplay, Navigation, Pagination } from "swiper/modules"
-import { type Source } from "../../source"
+import { type Source } from "../../sourceMeta"
 import { ContentsCardExpanded } from "../molecules/ContentsCardExpanded"
 
 export function ContentsCarousel(props: { sources: Source[] }) {
@@ -30,7 +30,7 @@ export function ContentsCarousel(props: { sources: Source[] }) {
   return (
     <Card sx={{ padding: 2, mb: 2 }}>
       <CardContent>
-        <Typography variant="h4">実績</Typography>
+        <Typography variant="h4">成果物・取り組み・実績</Typography>
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
           spaceBetween={50}

@@ -1,5 +1,11 @@
 import LinkIcon from "@mui/icons-material/Link"
-import { MdExtension as ExtensionIcon } from "react-icons/md"
+import WorkIcon from "@mui/icons-material/Work"
+import { BiPackage as PackageIcon } from "react-icons/bi"
+import { FaCss3 as CSSIcon } from "react-icons/fa"
+import {
+  MdSettingsApplications as ConfigIcon,
+  MdExtension as ExtensionIcon,
+} from "react-icons/md"
 import {
   SiBun as BunIcon,
   SiCodepen as CodepenIcon,
@@ -28,182 +34,196 @@ import {
   SiZsh as ZshIcon,
 } from "react-icons/si"
 import { SlNote as NoteIcon } from "react-icons/sl"
-import { OmitByValue, PickByValue, entries, keys } from "./util"
+import { TbSql as SQLIcon } from "react-icons/tb"
+import type {
+  ContentsTagClassificationRecordConditions,
+  ContentsTagRecordConditions,
+  LinkItemRecordConditions,
+  SourceOmited,
+  TreeLogosConditions,
+} from "./sourceMeta"
 
-export const contentsTagLogo = {
-  axum: { type: "skill", description: "RustWebフレームワーク" },
-  bash: { type: "skill", description: "シェルスクリプト言語" },
+export const contentsTagClassificationRecord = {
+  skill: {
+    text: "スキル",
+  },
+  state: {
+    text: "開発形態",
+  },
+  appstyle: {
+    text: "使用形態",
+  },
+  publication: {
+    text: "公開状況",
+  },
+  app: {
+    text: "アプリケーション",
+  },
+  language: {
+    text: "言語",
+  },
+} as const satisfies ContentsTagClassificationRecordConditions
+
+export type ContentsTagClassificationRecord =
+  typeof contentsTagClassificationRecord
+
+export const contentsTagRecord = {
+  axum: { type: "app", description: "RustWebフレームワーク" },
+  bash: { type: "app", description: "シェルスクリプト言語" },
   Bun: {
     logo: { icon: <BunIcon />, color: "#f3e8b8", backgroundColor: "#000" },
-    type: "skill",
+    type: "app",
     description: "JavaScriptランタイム",
   },
-  Chevrotain: { type: "skill", description: "パーサービルダー" },
+  Chevrotain: { type: "app", description: "パーサービルダー" },
+  CSS: {
+    logo: { icon: <CSSIcon />, color: "#264de4" },
+    type: "language",
+    description: "Webスタイルシート言語",
+  },
   Deno: {
     logo: { icon: <DenoIcon />, color: "#000000" },
-    type: "skill",
+    type: "app",
     description: "JavaScriptランタイム",
   },
   Docker: {
     logo: { icon: <DockerIcon />, color: "#2496ed" },
-    type: "skill",
+    type: "app",
     description: "コンテナ化技術",
   },
   Go: {
     logo: { icon: <GoIcon />, color: "#00acd7" },
-    type: "skill",
+    type: "language",
     description: "システムプログラミング言語",
   },
   JavaScript: {
     logo: { icon: <JavaScriptIcon />, color: "#f7df1e" },
-    type: "skill",
+    type: "language",
     description: "Webプログラミング言語",
   },
   jQuery: {
     logo: { icon: <JqueryIcon />, color: "#0865a7" },
-    type: "skill",
+    type: "app",
     description: "DOM操作ライブラリ",
   },
   minIO: {
     logo: { icon: <MinIOIcon />, color: "#c72745" },
-    type: "skill",
+    type: "app",
     description: "オブジェクトストレージサーバ",
   },
   MUI: {
     logo: { icon: <MuiIcon />, color: "#0081cb" },
-    type: "skill",
+    type: "app",
     description: "UIコンポーネントライブラリ",
   },
   "Node.js": {
     logo: { icon: <NodeIcon />, color: "#68a063" },
-    type: "skill",
+    type: "app",
     description: "JavaScriptランタイム",
   },
   Python: {
     logo: { icon: <PythonIcon />, color: "#306998" },
-    type: "skill",
+    type: "language",
     description: "汎用プログラミング言語",
   },
   Rails: {
     logo: { icon: <RailsIcon />, color: "#cc0000" },
-    type: "skill",
+    type: "app",
     description: "Ruby用Webフレームワーク",
   },
   React: {
     logo: { icon: <ReactIcon />, color: "#61dafb" },
-    type: "skill",
+    type: "app",
     description: "UI開発ライブラリ",
   },
   Redux: {
     logo: { icon: <ReduxIcon />, color: "#764abc" },
-    type: "skill",
+    type: "app",
     description: "React用状態管理ライブラリ",
   },
   Ruby: {
     logo: { icon: <RubyIcon />, color: "#cc342d" },
-    type: "skill",
+    type: "language",
     description: "汎用プログラミング言語",
   },
   Rust: {
     logo: { icon: <RustIcon />, color: "#000000" },
-    type: "skill",
+    type: "language",
     description: "システムプログラミング言語",
   },
-  "Peg.js/Peggy": { type: "skill", description: "パーサージェネレーター" },
-  SQL: { type: "skill", description: "DB操作" },
+  "Peg.js/Peggy": { type: "app", description: "パーサージェネレーター" },
+  SQL: {
+    logo: { icon: <SQLIcon />, color: "#000000" },
+    type: "app",
+    description: "DB操作",
+  },
   vim: {
     logo: { icon: <VimIcon />, color: "#019733" },
-    type: "skill",
+    type: "app",
     description: "テキストエディタ",
   },
   zsh: {
     logo: { icon: <ZshIcon />, color: "#e84e0e" },
-    type: "skill",
+    type: "app",
     description: "シェルスクリプト言語",
   },
-  TextAliveAppAPI: { type: "skill", description: "歌詞連動アニメーションAPI" },
+  TextAliveAppAPI: { type: "app", description: "歌詞連動アニメーションAPI" },
   TypeScript: {
     logo: { icon: <TypeScriptIcon />, color: "#3178c6" },
-    type: "skill",
+    type: "language",
     description: "JavaScriptの型付け拡張",
   },
   構文解析: { type: "skill", description: "テキストの構造化" },
   画像処理: { type: "skill", description: "" },
   並列処理: { type: "skill", description: "" },
-  アプリ: { type: "genre", description: "" },
+  暗号処理: { type: "skill", description: "" },
+  フロントエンド: { type: "skill", description: "" },
+  サーバサイド: { type: "skill", description: "" },
+  インフラ: { type: "skill", description: "" },
+  資格: { type: "skill", description: "" },
+  Webアプリ: { type: "appstyle", description: "" },
   モジュール: {
-    type: "genre",
+    type: "appstyle",
     description: "アプリに組み込む頒布可能な状態の部分要素",
   },
-  CUIツール: { type: "genre", description: "" },
-  スクリプト: { type: "genre", description: "" },
-  設定ファイル: { type: "genre", description: "" },
-  ブラウザ拡張機能: { type: "genre", description: "" },
-  esolang: { type: "genre", description: "難解プログラミング言語" },
+  CUIツール: { type: "appstyle", description: "" },
+  スクリプト: { type: "appstyle", description: "" },
+  設定ファイル: { type: "appstyle", description: "" },
+  ブラウザ拡張機能: { type: "appstyle", description: "" },
+  esolang: { type: "appstyle", description: "難解プログラミング言語" },
   インターン: { type: "state", description: "" },
   課題: { type: "state", description: "" },
   研究用: { type: "state", description: "" },
-  自分用: { type: "state", description: "" },
+  "自分用・趣味": { type: "state", description: "" },
   コンテスト向け: { type: "state", description: "" },
   個人開発: { type: "state", description: "" },
   チーム開発: { type: "state", description: "" },
   "フォーク・コントリビュート": { type: "state", description: "" },
   パッケージ配布有: {
     logo: { icon: <NpmIcon />, color: "#cb3837" },
-    type: "auto",
+    type: "publication",
     description: "deno/x・jsr・npmを経由して利用可能",
   },
   リポジトリ有: {
     logo: { icon: <GitHubIcon />, color: "#181717" },
-    type: "auto",
+    type: "publication",
     description: "リポジトリ公開中",
   },
   記事有: {
     logo: { icon: <NoteIcon />, color: "#000000" },
-    type: "auto",
+    type: "publication",
     description: "記事公開中",
   },
   デモ有: {
     logo: { icon: <CodepenIcon />, color: "#000000" },
-    type: "auto",
+    type: "publication",
     description: "デモ公開中",
   },
-} as const satisfies Record<
-  string,
-  {
-    logo?: { icon: JSX.Element; color: string; backgroundColor?: string }
-    type: "skill" | "auto" | "state" | "genre"
-    description: string
-  }
->
+} as const satisfies ContentsTagRecordConditions
 
-export const contentsTags = keys(contentsTagLogo)
-const contentsTagEntries = entries(contentsTagLogo)
-type ContentsTagManual = keyof OmitByValue<
-  typeof contentsTagLogo,
-  { type: "auto" }
->
-type ContentsTagAuto = keyof PickByValue<
-  typeof contentsTagLogo,
-  { type: "auto" }
->
-export type ContentsTag = ContentsTagAuto | ContentsTagManual
-export const contentsTagsTree = {
-  技術: contentsTagEntries
-    .filter((x) => x[1].type === "skill")
-    .map((x) => x[0]),
-  ジャンル: contentsTagEntries
-    .filter((x) => x[1].type === "genre")
-    .map((x) => x[0]),
-  開発形態: contentsTagEntries
-    .filter((x) => x[1].type === "state")
-    .map((x) => x[0]),
-  公開状況: contentsTagEntries
-    .filter((x) => x[1].type === "auto")
-    .map((x) => x[0]),
-} as const satisfies Record<string, ContentsTag[]>
+export type AutoContents = "publication"
 
-export const linkTypes = {
+export const linkItemRecord = {
   deno: {
     message: "deno/x",
     icon: <DenoIcon />,
@@ -260,55 +280,60 @@ export const linkTypes = {
     domain: ["codesandbox.io"],
   },
   other: { message: "リンク", icon: <LinkIcon />, title: "リンク", domain: [] },
-} as const satisfies Record<
-  string,
-  { message: string; icon: JSX.Element; title: string; domain: string[] }
->
+} as const satisfies LinkItemRecordConditions
 
-export const linkType = keys(linkTypes)
-export type LinkType = (typeof linkType)[number]
-
-type LinkDetail = { url: string; type: LinkType; message?: string }
-
-export type Source = {
-  id: number
-  title: string
-  description: string
-  date: string
-  summary: string
-  link?: LinkDetail[]
-  img?: string
-  tag: ContentsTag[]
-  visible: boolean
-  recent: boolean
-  score?: 0 | 1 | 2 | 3 | 4 | 5
-}
-
-type SourceOmited = Omit<
-  Source,
-  "id" | "tag" | "link" | "visible" | "recent"
-> & {
-  tag: ContentsTagManual[]
-  link?: (string | LinkDetail)[]
-}
-
-const sourcesOrigin: SourceOmited[] = [
+export const sourcesOrigin: SourceOmited[] = [
+  {
+    title: "基本情報技術者試験(FE)",
+    summary: "IPAが行う情報処理技術者試験",
+    description:
+      "技術に関心を持った頃、せっかくなので取り組むべきという薦めを受けて基本情報技術者試験に取り組みました。合格しました。",
+    date: "2017-05-17",
+    tag: ["資格"],
+    score: 1,
+  },
+  {
+    title: "応用情報技術者試験(AP)",
+    summary: "IPAが行う情報処理技術者試験",
+    description:
+      "技術の道で生きると決めた後、応用情報技術者試験に取り組みました。合格しました。",
+    date: "2019-12-20",
+    tag: ["資格"],
+    score: 1,
+  },
+  {
+    title: "情報処理安全確保支援士試験",
+    summary: "IPAが行う情報処理技術者試験",
+    description:
+      "情報セキュリティに関心が高かった頃、理解を深めるため情報処理安全確保支援士試験に取り組みました。合格しましたがセキスペには登録していません。",
+    date: "2021-06-25",
+    tag: ["資格"],
+    score: 1,
+  },
   {
     title: "PKSHA Technology インターン選考",
     summary: "PKSHA Technology インターン選考",
     description:
       "PKSHA Technology インターン選考に参加しました。Maasチームの一員として、旧システムのリプレイス業務に参加しました。",
     date: "2023-12-31",
-    tag: ["インターン", "Go"],
-    score: 1,
+    tag: ["インターン", "Go", "サーバサイド"],
+    score: 2,
   },
   {
     title: "freee株式会社サマーインターン",
     summary: "フロントエンド・バックエンドエンジニア(2週間)",
     description: "メンターと共に新規機能の実装に取り組んだ。",
     date: "2021-08-31",
-    tag: ["インターン", "Ruby", "Rails", "React", "個人開発"],
-    score: 1,
+    tag: [
+      "インターン",
+      "Ruby",
+      "Rails",
+      "React",
+      "個人開発",
+      "サーバサイド",
+      "フロントエンド",
+    ],
+    score: 2,
   },
   {
     title: "ゆめみ2023夏インターン",
@@ -316,9 +341,9 @@ const sourcesOrigin: SourceOmited[] = [
     description:
       "ゆめみのサマーインターンに参加しました。ほぼ初Rust、初Macという初めてだらけの環境でしたが、何とかへばりついてやっていけました。",
     date: "2023-09-09",
-    tag: ["インターン", "Rust", "axum", "チーム開発"],
+    tag: ["インターン", "Rust", "axum", "チーム開発", "サーバサイド"],
     link: ["https://note.com/gunseikpaseri/n/n4276746bf6b2"],
-    score: 1,
+    score: 2,
   },
   {
     title: "perfect-ini-parser",
@@ -335,7 +360,7 @@ iniのパースを行う際、改行・タグ・空白文字を無視するこ�
     tag: [
       "Deno",
       "個人開発",
-      "自分用",
+      "自分用・趣味",
       "JavaScript",
       "TypeScript",
       "構文解析",
@@ -360,7 +385,7 @@ JSONのパースを行う際、改行・タグ・空白文字を無視するこ�
     tag: [
       "Deno",
       "個人開発",
-      "自分用",
+      "自分用・趣味",
       "JavaScript",
       "TypeScript",
       "構文解析",
@@ -396,7 +421,10 @@ FIDO2やTOTP等の多要素認証に対応。
       "React",
       "Redux",
       "個人開発",
+      "自分用・趣味",
       "コンテスト向け",
+      "フロントエンド",
+      "サーバサイド",
       "Deno",
       "Node.js",
       "JavaScript",
@@ -405,7 +433,8 @@ FIDO2やTOTP等の多要素認証に対応。
       "minIO",
       "SQL",
       "MUI",
-      "アプリ",
+      "Webアプリ",
+      "暗号処理",
     ],
     img: "./e2eencloud.png",
     date: "2023-08-12",
@@ -432,7 +461,8 @@ FIDO2やTOTP等の多要素認証に対応。
       "JavaScript",
       "TypeScript",
       "TextAliveAppAPI",
-      "アプリ",
+      "Webアプリ",
+      "フロントエンド",
     ],
     date: "2020-09-18",
     score: 4,
@@ -451,12 +481,13 @@ FIDO2やTOTP等の多要素認証に対応。
     img: "./react-window-system.png",
     tag: [
       "個人開発",
-      "自分用",
+      "自分用・趣味",
       "Bun",
       "React",
       "JavaScript",
       "TypeScript",
       "モジュール",
+      "フロントエンド",
     ],
     date: "2024-02-05",
     score: 3,
@@ -467,7 +498,7 @@ FIDO2やTOTP等の多要素認証に対応。
     description:
       "PDFからコピペしたいとき、余分な改行・スペースと思しきものを自動で除去してくれる簡易的なツール。",
     link: ["https://codepen.io/GunseiKPaseri/full/WNdBoQe"],
-    tag: ["個人開発", "自分用", "JavaScript", "アプリ"],
+    tag: ["個人開発", "自分用・趣味", "JavaScript", "Webアプリ"],
     date: "2021-12-31",
     score: 3,
   },
@@ -505,12 +536,13 @@ FIDO2やTOTP等の多要素認証に対応。
     ],
     tag: [
       "個人開発",
-      "自分用",
+      "自分用・趣味",
       "JavaScript",
       "TypeScript",
       "React",
       "MUI",
-      "アプリ",
+      "Webアプリ",
+      "フロントエンド",
     ],
     date: "2023-05-15",
     score: 2,
@@ -526,11 +558,12 @@ FIDO2やTOTP等の多要素認証に対応。
     ],
     tag: [
       "個人開発",
-      "自分用",
+      "自分用・趣味",
       "Deno",
       "TypeScript",
       "JavaScript",
       "モジュール",
+      "サーバサイド",
     ],
     date: "2022-01-08",
   },
@@ -538,7 +571,7 @@ FIDO2やTOTP等の多要素認証に対応。
     title: "tenjijs（仮称）",
     summary: "点字を利用した難解プログラミング言語",
     description:
-      "点字でプログラムする難解プログラミング言語。[fizzbuzzを解くソースコードの例](https://github.com/GunseiKPaseri/tenjijs/blob/main/example_fizzbuzz2.tj)はこのようになっており、非常に読み取りずらい。[PEG.js](https://pegjs.org/)・[escodegen](https://github.com/estools/escodegen)を利用したAltJSで実現。vitestを用いて正常に実行できるかを確認できる。授業課題。文法の解説・プレイグラウンドを作成予定。",
+      "点字(Unicode Braille Pattern)でプログラムする難解プログラミング言語。[fizzbuzzを解くソースコードの例](https://github.com/GunseiKPaseri/tenjijs/blob/main/example_fizzbuzz2.tj)はこのようになっており、非常に読み取りずらい。[PEG.js](https://pegjs.org/)・[escodegen](https://github.com/estools/escodegen)を利用したAltJSで実現。vitestを用いて正常に実行できるかを確認できる。授業課題。文法の解説・プレイグラウンドを作成予定。",
     link: ["https://github.com/GunseiKPaseri/tenjijs"],
     img: "./tenjijs.png",
     tag: [
@@ -564,7 +597,7 @@ FIDO2やTOTP等の多要素認証に対応。
     ],
     tag: [
       "フォーク・コントリビュート",
-      "自分用",
+      "自分用・趣味",
       "TypeScript",
       "JavaScript",
       "モジュール",
@@ -581,7 +614,7 @@ FIDO2やTOTP等の多要素認証に対応。
       "https://www.npmjs.com/package/imghashjs",
     ],
     tag: [
-      "自分用",
+      "自分用・趣味",
       "JavaScript",
       "TypeScript",
       "モジュール",
@@ -598,7 +631,7 @@ FIDO2やTOTP等の多要素認証に対応。
     link: [
       "https://chromewebstore.google.com/detail/%E4%BF%BA%E5%BE%97%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD%E9%9B%86/ikaoaeddhkepbhjbfjjnpghheikmgmda",
     ],
-    tag: ["自分用", "JavaScript", "アプリ", "ブラウザ拡張機能", "jQuery"],
+    tag: ["自分用・趣味", "JavaScript", "ブラウザ拡張機能", "jQuery", "CSS"],
     date: "2021-08-19",
   },
   {
@@ -612,13 +645,13 @@ FIDO2やTOTP等の多要素認証に対応。
     ],
     img: "./picpickdl.jpg",
     tag: [
-      "自分用",
-      "アプリ",
+      "自分用・趣味",
       "JavaScript",
       "TypeScript",
       "ブラウザ拡張機能",
       "React",
       "MUI",
+      "フロントエンド",
     ],
     date: "2021-09-27",
   },
@@ -628,7 +661,7 @@ FIDO2やTOTP等の多要素認証に対応。
     description:
       "テキストエディタMeryの色分け用の構文ファイルです。JavaScriptとCSS3を用意しています。",
     link: ["https://github.com/GunseiKPaseri/Mery_msy"],
-    tag: ["自分用", "設定ファイル"],
+    tag: ["自分用・趣味", "設定ファイル"],
     date: "2018-02-08",
     score: 2,
   },
@@ -636,12 +669,19 @@ FIDO2やTOTP等の多要素認証に対応。
     title: "SimpleClock",
     summary: "時計アプリ",
     description:
-      "簡単な時計アプリです。年越しとかゾロ目の時を眺めるのに使います。",
+      "簡単な時計アプリです。年越しとかゾロ目の時を眺めるのに使います。CSSの作りこみも頑張りました",
     link: [
       "https://github.com/GunseiKPaseri/SimpleClock",
       "https://gunseikpaseri.github.io/SimpleClock/",
     ],
-    tag: ["自分用", "アプリ", "JavaScript", "jQuery"],
+    tag: [
+      "自分用・趣味",
+      "Webアプリ",
+      "JavaScript",
+      "jQuery",
+      "CSS",
+      "フロントエンド",
+    ],
     img: "./simpleclock.png",
     date: "2017-10-07",
     score: 1,
@@ -652,7 +692,7 @@ FIDO2やTOTP等の多要素認証に対応。
     description:
       "bashのプロンプトを自作しました。パンくずリスト型でディレクトリ情報・git情報・pyenv等を表示します。現在は[starship](https://starship.rs/ja-JP/)を利用しているので使用していないです。",
     link: ["https://qiita.com/GunseiKPaseri/items/e594c8e261905e3d0281"],
-    tag: ["自分用", "bash", "スクリプト"],
+    tag: ["自分用・趣味", "bash", "スクリプト"],
     date: "2020-09-17",
   },
   {
@@ -661,7 +701,7 @@ FIDO2やTOTP等の多要素認証に対応。
     description:
       "ニコニコ大百科記事の自動取得を行うスクリプト。ユーザ記事・動画記事を仕様変更やお絵カキコ・ピコカキコを取得できるよう[変更を加えた](https://github.com/GunseiKPaseri/sb.webscraping/compare/857aaa0...5453de5)。メンテナンスを行っていないため現在動作するか不明。",
     link: ["https://github.com/GunseiKPaseri/sb.webscraping/tree/somefix"],
-    tag: ["フォーク・コントリビュート", "自分用", "Python", "CUIツール"],
+    tag: ["フォーク・コントリビュート", "自分用・趣味", "Python", "CUIツール"],
     date: "2020-09-08",
   },
   {
@@ -669,7 +709,7 @@ FIDO2やTOTP等の多要素認証に対応。
     summary: "個人設定ファイル",
     description:
       "自分用の設定ファイルをまとめたリポジトリ。zshrc・vimrc・tmux.conf等が含まれる。",
-    tag: ["自分用", "vim", "zsh", "設定ファイル", "スクリプト"],
+    tag: ["自分用・趣味", "vim", "zsh", "設定ファイル", "スクリプト"],
     link: ["https://github.com/GunseiKPaseri/.dotfiles"],
     date: "2023-01-21",
   },
@@ -678,85 +718,23 @@ FIDO2やTOTP等の多要素認証に対応。
     summary: "自宅サーバ構築",
     description:
       "自宅サーバをRaspiで運用しています。dockerを利用しNextcloud・Jellyfin・Gitea等を利用中。公開できるものを用意したい。",
-    tag: ["自分用", "Docker"],
+    tag: ["自分用・趣味", "Docker", "インフラ"],
     date: "2023-02-11",
   },
 ]
 
-const linkDetailSuggester = (url: string): LinkDetail => {
-  for (const [lt, lnk] of entries(linkTypes)) {
-    if (
-      lnk.domain.some(
-        (x) =>
-          url.startsWith(`https://${x}/`) ||
-          url.startsWith(`https://www.${x}/`),
-      )
-    ) {
-      return { url, type: lt }
-    }
-  }
-  return { url, type: "other" }
-}
-
-const compareSource = (a: Source, b: Source) => {
-  // pick up recent item
-  if (a.recent && !b.recent) return -1
-  if (!a.recent && b.recent) return 1
-
-  // compare score
-  if ((a.score ?? 0) > (b.score ?? 0)) return -1
-  if ((a.score ?? 0) < (b.score ?? 0)) return 1
-
-  // compare date
-  return b.date.localeCompare(a.date)
-}
-
-export const sources = sourcesOrigin
-  .map((s, i): Source => {
-    const link: Source["link"] = s.link?.map((x) =>
-      typeof x === "string" ? linkDetailSuggester(x) : x,
-    )
-    const tag: Source["tag"] = [
-      ...s.tag,
-      ...(link?.some(
-        (x) => x.type === "deno" || x.type === "jsr" || x.type === "npm",
-      )
-        ? (["パッケージ配布有"] as const)
-        : []),
-      ...(link?.some((x) => x.type === "github")
-        ? (["リポジトリ有"] as const)
-        : []),
-      ...(link?.some(
-        (x) => x.type === "note" || x.type === "qiita" || x.type === "zenn",
-      )
-        ? (["記事有"] as const)
-        : []),
-      ...(link?.some((x) => x.type === "codepen" || x.type === "codesandbox")
-        ? (["デモ有"] as const)
-        : []),
-    ]
-
-    const date = new Date(s.date)
-    // 半年以内の記事はnewマークを表示
-    const recent = Date.now() - date.getTime() < 1000 * 60 * 60 * 24 * 180
-
-    return {
-      ...s,
-      tag,
-      link,
-      visible: true,
-      id: i,
-      recent,
-    } satisfies Source
-  })
-  .toSorted(compareSource)
-
-const sourcesValue = Object.values(sources)
-export const contentsTagCount = Object.fromEntries(
-  contentsTags.map((tag): [ContentsTag, number] => {
-    return [
-      tag,
-      sourcesValue.reduce((acc, x) => (x.tag.includes(tag) ? acc + 1 : acc), 0),
-    ]
-  }),
-) as Record<ContentsTag, number>
+export const treeLogos = [
+  { conditions: "インターン", logo: { icon: <WorkIcon />, color: "#000000" } },
+  {
+    conditions: "モジュール",
+    logo: { icon: <PackageIcon />, color: "#000000" },
+  },
+  {
+    conditions: "設定ファイル",
+    logo: { icon: <ConfigIcon />, color: "#000000" },
+  },
+  {
+    conditions: "ブラウザ拡張機能",
+    logo: { icon: <ExtensionIcon />, color: "#008800" },
+  },
+] as const satisfies TreeLogosConditions

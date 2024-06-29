@@ -7,10 +7,10 @@ import Collapse from "@mui/material/Collapse"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import { useState } from "react"
-import { type Source, contentsTagsTree, sources } from "../../source"
+import { type Source, sources } from "../../sourceMeta"
 import { SearchField } from "../atom/SearchField"
-import { TagList } from "../molecules/TagList"
 import { ExpandMore } from "../util/ExpandMore"
+import { SeparatedTagList } from "./SeparatedTagList"
 
 export function SearchCard(props: {
   searchWord: string
@@ -54,25 +54,7 @@ export function SearchCard(props: {
           onChange={setSearchWord}
           onClear={() => setSearchWord("")}
         />
-        <Typography variant="h5" color="inherit" sx={{ mt: 2 }}>
-          タグ
-        </Typography>
-        <Typography variant="h6" color="inherit" sx={{ mt: 2 }}>
-          技術
-        </Typography>
-        <TagList tags={contentsTagsTree["技術"]} />
-        <Typography variant="h6" color="inherit" sx={{ mt: 2 }}>
-          ジャンル
-        </Typography>
-        <TagList tags={contentsTagsTree["ジャンル"]} />
-        <Typography variant="h6" color="inherit" sx={{ mt: 2 }}>
-          開発形態
-        </Typography>
-        <TagList tags={contentsTagsTree["開発形態"]} />
-        <Typography variant="h6" color="inherit" sx={{ mt: 2 }}>
-          公開状況
-        </Typography>
-        <TagList tags={contentsTagsTree["公開状況"]} />
+        <SeparatedTagList />
       </Collapse>
     </Card>
   )

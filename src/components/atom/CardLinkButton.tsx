@@ -2,13 +2,14 @@ import Button from "@mui/material/Button"
 import IconButton from "@mui/material/IconButton"
 import Tooltip from "@mui/material/Tooltip"
 
-import { type Source, linkTypes } from "../../source"
+import { linkItemRecord } from "../../source"
+import { type Source } from "../../sourceMeta"
 import { useWindowSize } from "../../util"
 
 export const CardLinkButton = (props: {
   link: NonNullable<Source["link"]>[number]
 }) => {
-  const result = linkTypes[props.link.type]
+  const result = linkItemRecord[props.link.type]
   const [width, _height] = useWindowSize()
   return (
     <Tooltip title={props.link.message ?? result.title}>

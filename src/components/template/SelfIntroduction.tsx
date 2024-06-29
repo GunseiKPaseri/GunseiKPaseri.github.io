@@ -1,6 +1,9 @@
+import Button from "@mui/material/Button"
 import Card from "@mui/material/Card"
+import CardActions from "@mui/material/CardActions"
 import CardContent from "@mui/material/CardContent"
 import Typography from "@mui/material/Typography"
+import { Link } from "react-router-dom"
 
 export function SelfIntroduction() {
   return (
@@ -16,6 +19,11 @@ export function SelfIntroduction() {
           インターネットに本名を載せていいのかまだ信じられずにいます。
         </Typography>
       </CardContent>
+      <CardActions>
+        <Button component={Link} size="small" to={"/timeline"}>
+          沿革
+        </Button>
+      </CardActions>
     </Card>
   )
 }

@@ -1,9 +1,9 @@
 import Container from "@mui/material/Container"
 
-import { sources } from "../../source.tsx"
-import { ContentsCarousel } from "../template/ContentsCarousel.tsx"
-import { Header } from "../template/Header.tsx"
-import { SelfIntroduction } from "../template/SelfIntroduction.tsx"
+import { sources } from "../../sourceMeta"
+import { ContentsCarousel } from "../template/ContentsCarousel"
+import { Header } from "../template/Header"
+import { SelfIntroduction } from "../template/SelfIntroduction"
 
 function App() {
   return (

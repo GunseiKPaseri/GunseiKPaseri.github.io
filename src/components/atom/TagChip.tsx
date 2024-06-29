@@ -5,21 +5,29 @@ import Box from "@mui/material/Box"
 import Tooltip from "@mui/material/Tooltip"
 import { useTheme } from "@mui/material/styles"
 
-import {
-  type ContentsTag,
-  contentsTagCount,
-  contentsTagLogo,
-} from "../../source"
+import { IconContext } from "react-icons"
+import { contentsTagRecord } from "../../source"
+import { type ContentsTag, contentsTagCount } from "../../sourceMeta"
 import { appContext, tagClick } from "../../state/context"
 
 const FixedChipIcon = (props: { children: React.ReactNode }) => (
-  <Box sx={{ ml: "0.5ex", position: "relative", top: "0.35ex", left: "0.1ex" }}>
-    {props.children}
-  </Box>
+  <IconContext.Provider value={{ size: "1.2em" }}>
+    <Box
+      sx={{
+        ml: "0.5ex",
+        position: "relative",
+        top: "0.35ex",
+        left: "0.1ex",
+        pr: "0.5ex",
+      }}
+    >
+      {props.children}
+    </Box>
+  </IconContext.Provider>
 )
 
 const TagIcon = (props: { tag: ContentsTag; active: boolean }) => {
-  const result = contentsTagLogo[props.tag] ?? undefined
+  const result = contentsTagRecord[props.tag] ?? undefined
   if (result && "logo" in result)
     return (
       <span
@@ -74,7 +82,7 @@ export const TagChip = (props: { tag: ContentsTag }) => {
   const context = useContext(appContext)
   const active = context.selectedTags.includes(props.tag)
   return (
-    <Tooltip title={contentsTagLogo[props.tag].description}>
+    <Tooltip title={contentsTagRecord[props.tag].description}>
       <Chip
         color={active ? "primary" : "default"}
         icon={<TagIcon active={active} tag={props.tag} />}

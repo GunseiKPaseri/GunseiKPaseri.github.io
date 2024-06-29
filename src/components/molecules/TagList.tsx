@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box"
-import type { ContentsTag } from "../../source"
+import { type ContentsTag } from "../../sourceMeta"
 import { TagChip } from "../atom/TagChip"
 
 export const TagList = (props: { tags: readonly ContentsTag[] }) => {
