@@ -3,6 +3,7 @@ import {
   type AutoContents,
   type ContentsTagClassificationRecord,
   contentsTagRecord,
+  historyOrigin,
   linkItemRecord,
   sourcesOrigin,
   treeLogos,
@@ -122,48 +123,48 @@ const getLogo = (tags: Source["tag"]): Logo => {
   }
 }
 
-export const sources = sourcesOrigin
-  .map((s, i): Source => {
-    const link: Source["link"] = s.link?.map((x) =>
-      typeof x === "string" ? linkDetailSuggester(x) : x,
+function fixSource(s: SourceOmited, i: number) {
+  const link: Source["link"] = s.link?.map((x) =>
+    typeof x === "string" ? linkDetailSuggester(x) : x,
+  )
+  const tag: Source["tag"] = [
+    ...s.tag,
+    ...(link?.some(
+      (x) => x.type === "deno" || x.type === "jsr" || x.type === "npm",
     )
-    const tag: Source["tag"] = [
-      ...s.tag,
-      ...(link?.some(
-        (x) => x.type === "deno" || x.type === "jsr" || x.type === "npm",
-      )
-        ? (["パッケージ配布有"] as const)
-        : []),
-      ...(link?.some((x) => x.type === "github")
-        ? (["リポジトリ有"] as const)
-        : []),
-      ...(link?.some(
-        (x) => x.type === "note" || x.type === "qiita" || x.type === "zenn",
-      )
-        ? (["記事有"] as const)
-        : []),
-      ...(link?.some((x) => x.type === "codepen" || x.type === "codesandbox")
-        ? (["デモ有"] as const)
-        : []),
-    ]
+      ? (["パッケージ配布有"] as const)
+      : []),
+    ...(link?.some((x) => x.type === "github")
+      ? (["リポジトリ有"] as const)
+      : []),
+    ...(link?.some(
+      (x) => x.type === "note" || x.type === "qiita" || x.type === "zenn",
+    )
+      ? (["記事有"] as const)
+      : []),
+    ...(link?.some((x) => x.type === "codepen" || x.type === "codesandbox")
+      ? (["デモ有"] as const)
+      : []),
+  ]
 
-    const logo = getLogo(s.tag)
+  const logo = getLogo(s.tag)
 
-    const date = new Date(s.date)
-    // 半年以内の記事はnewマークを表示
-    const recent = Date.now() - date.getTime() < 1000 * 60 * 60 * 24 * 180
+  const date = new Date(s.date)
+  // 半年以内の記事はnewマークを表示
+  const recent = Date.now() - date.getTime() < 1000 * 60 * 60 * 24 * 180
 
-    return {
-      ...s,
-      tag,
-      logo,
-      link,
-      visible: true,
-      id: i,
-      recent,
-    } satisfies Source
-  })
-  .toSorted(compareSource)
+  return {
+    ...s,
+    tag,
+    logo,
+    link,
+    visible: true,
+    id: i,
+    recent,
+  } satisfies Source
+}
+
+export const sources = sourcesOrigin.map(fixSource).toSorted(compareSource)
 
 const sourcesValue = Object.values(sources)
 export const contentsTagCount = Object.fromEntries(
@@ -174,3 +175,7 @@ export const contentsTagCount = Object.fromEntries(
     ]
   }),
 ) as Record<ContentsTag, number>
+
+export const myhistory = [...historyOrigin.map(fixSource), ...sources].toSorted(
+  (a, b) => a.date.localeCompare(b.date),
+)

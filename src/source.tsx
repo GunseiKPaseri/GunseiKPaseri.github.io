@@ -738,3 +738,34 @@ export const treeLogos = [
     logo: { icon: <ExtensionIcon />, color: "#008800" },
   },
 ] as const satisfies TreeLogosConditions
+
+export const historyOrigin: SourceOmited[] = [
+  {
+    title: "誕生",
+    summary: "2000年という節目に生まれました",
+    description: "",
+    tag: [],
+    date: "2000-00-00",
+  },
+  {
+    title: "高校入学",
+    summary: "頑張りました",
+    description: "",
+    tag: [],
+    date: "2016-04-01",
+  },
+  {
+    title: "大学入学",
+    summary: "頑張りました",
+    description: "",
+    tag: [],
+    date: "2019-04-01",
+  },
+  {
+    title: "大学院入学",
+    summary: "頑張りました",
+    description: "",
+    tag: [],
+    date: "2023-04-01",
+  },
+]

@@ -78,7 +78,10 @@ const TagNumber = (props: { num: number; active: boolean }) => {
   )
 }
 
-export const TagChip = (props: { tag: ContentsTag }) => {
+export const TagChip = (props: {
+  tag: ContentsTag
+  onClick?: (tag: ContentsTag) => void
+}) => {
   const context = useContext(appContext)
   const active = context.selectedTags.includes(props.tag)
   return (
@@ -91,7 +94,11 @@ export const TagChip = (props: { tag: ContentsTag }) => {
         size="small"
         sx={{ margin: "0.2em", fontSize: "0.85em" }}
         onClick={() => {
-          context.dispatch(tagClick(props.tag))
+          if (props.onClick !== undefined) {
+            props.onClick(props.tag)
+          } else {
+            context.dispatch(tagClick(props.tag))
+          }
         }}
         onDelete={() => undefined}
         deleteIcon={

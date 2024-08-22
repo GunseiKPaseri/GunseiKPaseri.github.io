@@ -7,9 +7,10 @@ import CardMedia from "@mui/material/CardMedia"
 import Collapse from "@mui/material/Collapse"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
-import { useState } from "react"
+import { useContext, useState } from "react"
 
-import { type Source } from "../../source.tsx"
+import { type Source } from "../../sourceMeta.tsx"
+import { appContext, tagClick } from "../../state/context.ts"
 import { CardLinkButton } from "../atom/CardLinkButton.tsx"
 import { Markdown } from "../atom/Markdown.tsx"
 import { NewBudge } from "../atom/NewBudge.tsx"
@@ -18,6 +19,7 @@ import { TagList } from "./TagList.tsx"
 
 export const ContentsCard = (props: { source: Source }) => {
   const [expanded, setExpanded] = useState(false)
+  const context = useContext(appContext)
 
   const handleExpandClick = () => {
     setExpanded(!expanded)
@@ -72,7 +74,12 @@ export const ContentsCard = (props: { source: Source }) => {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit sx={{ p: 1 }}>
         <Box sx={{ p: 1, pt: 0 }}>
-          <TagList tags={props.source.tag} />
+          <TagList
+            tags={props.source.tag}
+            onClick={(tag) => {
+              context.dispatch(tagClick(tag))
+            }}
+          />
         </Box>
         <Box sx={{ p: 1 }}>
           <Markdown>{props.source.description}</Markdown>

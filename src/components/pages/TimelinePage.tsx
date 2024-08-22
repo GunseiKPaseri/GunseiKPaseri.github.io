@@ -12,7 +12,9 @@ import TimelineItem from "@mui/lab/TimelineItem"
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent"
 import TimelineSeparator from "@mui/lab/TimelineSeparator"
 import { Container, Paper, Typography } from "@mui/material"
-import { sources } from "../../sourceMeta"
+import { myhistory } from "../../sourceMeta"
+import { Markdown } from "../atom/Markdown"
+import { NewBudge } from "../atom/NewBudge"
 
 export default function TimelinePage() {
   return (
@@ -34,37 +36,36 @@ export default function TimelinePage() {
       </Card>
       <Paper>
         <Timeline position="alternate">
-          {sources
-            .toSorted((a, b) => a.date.localeCompare(b.date))
-            .map((source) => (
-              <TimelineItem>
-                <TimelineOppositeContent
-                  sx={{ m: "auto 0" }}
-                  variant="body2"
-                  color="text.secondary"
+          {myhistory.map((source) => (
+            <TimelineItem>
+              <TimelineOppositeContent
+                sx={{ m: "auto 0" }}
+                variant="body2"
+                color="text.secondary"
+              >
+                {source.date}
+              </TimelineOppositeContent>
+              <TimelineSeparator>
+                <TimelineDot
+                  sx={{
+                    color: source.logo.color,
+                    bgColor: source.logo.backgroundColor ?? "#fff",
+                  }}
+                  variant="outlined"
                 >
-                  {source.date}
-                </TimelineOppositeContent>
-                <TimelineSeparator>
-                  <TimelineDot
-                    sx={{
-                      color: source.logo.color,
-                      bgColor: source.logo.backgroundColor ?? "#fff",
-                    }}
-                    variant="outlined"
-                  >
-                    {source.logo.icon}
-                  </TimelineDot>
-                  <TimelineConnector />
-                </TimelineSeparator>
-                <TimelineContent>
-                  <Typography variant="h6" component="span">
-                    {source.title}
-                  </Typography>
-                  <Typography>{source.summary}</Typography>
-                </TimelineContent>
-              </TimelineItem>
-            ))}
+                  {source.logo.icon}
+                </TimelineDot>
+                <TimelineConnector />
+              </TimelineSeparator>
+              <TimelineContent>
+                <Typography variant="h6" component="span">
+                  {source.recent && <NewBudge />}
+                  <Markdown>{source.title}</Markdown>
+                </Typography>
+                <Typography color="text.secondary">{source.summary}</Typography>
+              </TimelineContent>
+            </TimelineItem>
+          ))}
         </Timeline>
       </Paper>
     </Container>
