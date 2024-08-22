@@ -168,6 +168,10 @@ export const contentsTagRecord = {
     description: "シェルスクリプト言語",
   },
   TextAliveAppAPI: { type: "app", description: "歌詞連動アニメーションAPI" },
+  Textlint: {
+    type: "app",
+    description: "テキスト検査ツール",
+  },
   TypeScript: {
     logo: { icon: <TypeScriptIcon />, color: "#3178c6" },
     type: "language",
@@ -368,6 +372,36 @@ iniのパースを行う際、改行・タグ・空白文字を無視するこ�
       "モジュール",
     ],
     date: "2024-06-01",
+    score: 2,
+  },
+  {
+    title: "textlint-rule-ja-tojihiraki",
+    summary: "漢字の閉じ開きを統一するTextlintルール",
+    description: `
+「感じる事」「感じること」のように漢字を読みやすく「ひらく」か「閉じる」かを各単語ごとに統一するTextlintルール。形態素解析したトークンを利用して判定する。
+`,
+    link: [
+      "https://www.npmjs.com/package/textlint-rule-ja-tojihiraki",
+      "https://github.com/GunseiKPaseri/textlint-rule-ja-tojihiraki",
+      "https://zenn.dev/gunseikpaseri/articles/textlint-rule",
+    ],
+    tag: ["Node.js", "Textlint", "モジュール", "自分用・趣味"],
+    date: "2024-08-15",
+    score: 2,
+  },
+  {
+    title: "textlint-rule-ja-overlooked-typo",
+    summary: "見逃しそうなTypoを検出するTextlintルール",
+    description: `
+「二ュートン」「タぺストリー」「たいヘん」のような一目見ただけでは気づけないTypoを検出するTextlintルール。正規表現を利用して判定する。
+`,
+    link: [
+      "https://www.npmjs.com/package/textlint-rule-ja-overlooked-typo",
+      "https://github.com/GunseiKPaseri/textlint-rule-ja-overlooked-typo",
+      "https://zenn.dev/gunseikpaseri/articles/textlint-rule",
+    ],
+    tag: ["Node.js", "Textlint", "モジュール", "自分用・趣味"],
+    date: "2024-08-15",
     score: 2,
   },
   {
