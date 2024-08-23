@@ -8,7 +8,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          framer: ["framer-motion"],
+          decolation: ["framer-motion", "@mui/lab", "@mui/material"],
         },
       },
     },

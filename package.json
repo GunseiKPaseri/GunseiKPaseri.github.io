@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "test": "npm run pre-commit && npm run build",
     "build": "tsc && vite build",
     "fmt": "npx @biomejs/biome check --write ./src vite.config.ts tsconfig.json tsconfig.node.json README.md eslint.config.js package.json package-lock.json index.html",
     "visualizer": "vite-bundle-visualizer",
