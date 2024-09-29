@@ -3,7 +3,7 @@ import IconButton from "@mui/material/IconButton"
 import Tooltip from "@mui/material/Tooltip"
 
 import { linkItemRecord } from "../../source"
-import { type Source } from "../../sourceMeta"
+import type { Source } from "../../sourceMeta"
 import { useWindowSize } from "../../util"
 
 export const CardLinkButton = (props: {

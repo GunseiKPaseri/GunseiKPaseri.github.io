@@ -1,4 +1,5 @@
-import React, { ReactNode, useReducer } from "react"
+import type React from "react"
+import { type ReactNode, useReducer } from "react"
 import { appContext, appInitialState, appReducer } from "./context"
 
 export const AppContextProvider: React.FC<{ children: ReactNode }> = ({

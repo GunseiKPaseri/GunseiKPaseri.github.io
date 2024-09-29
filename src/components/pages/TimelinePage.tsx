@@ -37,7 +37,7 @@ export default function TimelinePage() {
       <Paper>
         <Timeline position="alternate">
           {myhistory.map((source) => (
-            <TimelineItem>
+            <TimelineItem key={source.id}>
               <TimelineOppositeContent
                 sx={{ m: "auto 0" }}
                 variant="body2"

@@ -9,7 +9,7 @@ import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import { useContext, useState } from "react"
 
-import { type Source } from "../../sourceMeta.tsx"
+import type { Source } from "../../sourceMeta.tsx"
 import { appContext, tagClick } from "../../state/context.ts"
 import { CardLinkButton } from "../atom/CardLinkButton.tsx"
 import { Markdown } from "../atom/Markdown.tsx"
@@ -55,13 +55,9 @@ export const ContentsCard = (props: { source: Source }) => {
       )}
       <CardActions disableSpacing>
         <Stack spacing={1} direction="row">
-          {props.source.link && (
-            <>
-              {props.source.link.map((x) => (
-                <CardLinkButton key={x.url} link={x} />
-              ))}
-            </>
-          )}
+          {props.source.link?.map((x) => (
+            <CardLinkButton key={x.url} link={x} />
+          ))}
         </Stack>
         <ExpandMore
           expand={expanded}

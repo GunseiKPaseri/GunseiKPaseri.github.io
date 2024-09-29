@@ -31,9 +31,9 @@ const findSource = (keyword: string, selectedTags: ContentsTag[]) => {
   )
   return filteredSource.map((x) => ({
     ...x,
-    title: x.title.replaceAll(rg, `<mark>$1</mark>`),
-    summary: x.summary.replaceAll(rg, `<mark>$1</mark>`),
-    description: x.description.replaceAll(rg, `<mark>$1</mark>`),
+    title: x.title.replaceAll(rg, "<mark>$1</mark>"),
+    summary: x.summary.replaceAll(rg, "<mark>$1</mark>"),
+    description: x.description.replaceAll(rg, "<mark>$1</mark>"),
     visible:
       normalize(x.title).includes(normalizedKeyword) ||
       normalize(x.summary).includes(normalizedKeyword) ||

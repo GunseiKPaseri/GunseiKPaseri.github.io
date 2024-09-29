@@ -6,7 +6,7 @@ import CardMedia from "@mui/material/CardMedia"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 
-import { type Source } from "../../sourceMeta.tsx"
+import type { Source } from "../../sourceMeta.tsx"
 import { CardLinkButton } from "../atom/CardLinkButton.tsx"
 import { Markdown } from "../atom/Markdown.tsx"
 import { NewBudge } from "../atom/NewBudge.tsx"
@@ -49,13 +49,9 @@ export const ContentsCardExpanded = (props: { source: Source }) => {
         </CardContent>
         <CardActions disableSpacing>
           <Stack spacing={1} direction="row">
-            {props.source.link && (
-              <>
-                {props.source.link.map((x) => (
-                  <CardLinkButton key={x.url} link={x} />
-                ))}
-              </>
-            )}
+            {props.source.link?.map((x) => (
+              <CardLinkButton key={x.url} link={x} />
+            ))}
           </Stack>
         </CardActions>
       </Box>

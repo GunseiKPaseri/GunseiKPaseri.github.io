@@ -108,6 +108,7 @@ export function Header() {
               target="_blank"
               title={x.title}
               style={{ paddingRight: "0.2em" }}
+              rel="noreferrer"
             >
               <img src={x.imgsrc} alt={x.alt} style={{ height: "1.3em" }} />
             </a>

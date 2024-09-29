@@ -13,7 +13,7 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import { Link } from "react-router-dom"
 import { Autoplay, Navigation, Pagination } from "swiper/modules"
-import { type Source } from "../../sourceMeta"
+import type { Source } from "../../sourceMeta"
 import { ContentsCardExpanded } from "../molecules/ContentsCardExpanded"
 
 export function ContentsCarousel(props: { sources: Source[] }) {

@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { ContentsTag } from "../sourceMeta"
+import type { ContentsTag } from "../sourceMeta"
 
 const TagClickAction = "tagclick" as const
 export const tagClick = (tag: ContentsTag) => ({
@@ -18,7 +18,7 @@ export const appInitialState: AppState = {
 }
 
 export const appReducer: React.Reducer<AppState, AppAction> = (
-  state = appInitialState,
+  state,
   actions,
 ) => {
   switch (actions.type) {

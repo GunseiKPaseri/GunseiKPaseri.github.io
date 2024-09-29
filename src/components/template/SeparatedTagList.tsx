@@ -13,10 +13,11 @@ export function SeparatedTagList() {
       {entries(contentsTagClassificationRecord).map(
         ([tagType, tagTypeText]) => (
           <>
-            <Typography variant="h6" color="inherit" sx={{ mt: 2 }}>
+            <Typography key="title" variant="h6" color="inherit" sx={{ mt: 2 }}>
               {tagTypeText.text}
             </Typography>
             <TagList
+              key="taglist"
               tags={contentsTagEntries
                 .filter(([_, tag]) => tag.type === tagType)
                 .map((x) => x[0])
