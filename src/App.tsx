@@ -2,7 +2,7 @@ import {
   Outlet,
   RouterProvider,
   ScrollRestoration,
-  createBrowserRouter,
+  createHashRouter,
 } from "react-router-dom"
 import { ErrorPage } from "./components/pages/ErrorPage"
 import Home from "./components/pages/Home"
@@ -18,7 +18,7 @@ const Layout = () => {
   )
 }
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Layout />,
