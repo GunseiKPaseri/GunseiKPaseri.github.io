@@ -7,10 +7,12 @@
     "dev": "vite",
     "test": "npm run pre-commit && npm run build",
     "build": "tsc && vite build",
-    "fmt": "npx @biomejs/biome check --write",
-    "fix": "npx @biomejs/biome check --write --unsafe",
+    "fmt": "npx @biomejs/biome check --write --changed",
+    "fmt-all": "npx @biomejs/biome check --write",
+    "fix": "npx @biomejs/biome check --write --unsafe --changed",
+    "fix-all": "npx @biomejs/biome check --write --unsafe",
     "visualizer": "vite-bundle-visualizer",
-    "pre-commit": "npm run fmt",
+    "pre-commit": "npm run fmt-all",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -13,6 +13,12 @@
       "vite.config.ts"
     ]
   },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true,
+    "defaultBranch": "main"
+  },
   "organizeImports": {
     "enabled": true
   },
