@@ -15,7 +15,7 @@ distディレクトリ下が公開される。
 Github Actionsによるデプロイ結果がmasterブランチに展開され、公開される。
 
 ```sh
+npm test
 git commit
-npm run build
 git push
 ```

@@ -1,4 +1,4 @@
-import Grid from "@mui/material/Unstable_Grid2/Grid2"
+import Grid from "@mui/material/Grid2"
 import { AnimatePresence, motion } from "framer-motion"
 import { useContext, useMemo, useState } from "react"
 
@@ -63,7 +63,7 @@ export const ContentsList = () => {
             .filter((x) => x.visible)
             .map((x) => {
               return (
-                <Grid key={x.id} xs={12} sm={6}>
+                <Grid key={x.id} size={{ xs: 12, sm: 6 }}>
                   <motion.div
                     key={x.id}
                     layout
