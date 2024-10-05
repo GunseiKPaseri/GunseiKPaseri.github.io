@@ -18,11 +18,13 @@ export const ContentsCardExpanded = (props: { source: Source }) => {
 
   return (
     <Card sx={{ width: "100%", display: "flex" }}>
-      <CardMedia
-        sx={{ width: 300 }}
-        image={props.source.img}
-        title={props.source.title}
-      />
+      {props.source.img && (
+        <CardMedia
+          sx={{ width: 300 }}
+          image={props.source.img}
+          title={props.source.title}
+        />
+      )}
       <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
         <CardContent>
           <Typography variant="h5" component="div">
