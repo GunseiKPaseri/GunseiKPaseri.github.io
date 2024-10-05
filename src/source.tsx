@@ -639,6 +639,25 @@ FIDO2やTOTP等の多要素認証に対応。
     date: "2022-07-26",
   },
   {
+    title: "biome",
+    summary: "Web開発ツールチェーン",
+    description:
+      "高速なformat・lintを提供する。ドキュメントの誤植、新規のルールを実装するプルリクが取り込まれている。",
+    link: [
+      {"type": "other", "message": "公式サイト", "url": "https://biomejs.dev/"},
+      {"type": "github", "message": "Commits", "url": "https://github.com/biomejs/biome/commits?author=GunseiKPaseri"},
+      "https://www.npmjs.com/package/@biomejs/biome",
+    ],
+    tag: [
+      "フォーク・コントリビュート",
+      "自分用・趣味",
+      "TypeScript",
+      "JavaScript",
+      "Rust",
+    ],
+    date: "2024-09-19",
+  },
+  {
     title: "imghashjs",
     summary: "類似画像検出ライブラリ",
     description:
