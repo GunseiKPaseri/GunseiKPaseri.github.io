@@ -1,7 +1,7 @@
 import LinkIcon from "@mui/icons-material/Link"
 import WorkIcon from "@mui/icons-material/Work"
 import { BiPackage as PackageIcon } from "react-icons/bi"
-import { FaCss3 as CSSIcon } from "react-icons/fa"
+import { FaCss3 as CSSIcon, FaUbuntu as UbuntuIcon } from "react-icons/fa"
 import {
   MdSettingsApplications as ConfigIcon,
   MdExtension as ExtensionIcon,
@@ -35,6 +35,7 @@ import {
 } from "react-icons/si"
 import { SlNote as NoteIcon } from "react-icons/sl"
 import { TbSql as SQLIcon } from "react-icons/tb"
+import { VscAzure as AzureIcon } from "react-icons/vsc"
 import type {
   ContentsTagClassificationRecordConditions,
   ContentsTagRecordConditions,
@@ -69,6 +70,11 @@ export type ContentsTagClassificationRecord =
 
 export const contentsTagRecord = {
   axum: { type: "app", description: "RustWebフレームワーク" },
+  Azure: {
+    logo: { icon: <AzureIcon />, color: "#0089d6" },
+    type: "app",
+    description: "クラウドサービス",
+  },
   bash: { type: "app", description: "シェルスクリプト言語" },
   Bun: {
     logo: { icon: <BunIcon />, color: "#f3e8b8", backgroundColor: "#000" },
@@ -161,6 +167,11 @@ export const contentsTagRecord = {
     type: "app",
     description: "DB操作",
   },
+  Ubuntu: {
+    logo: { icon: <UbuntuIcon />, color: "#dd4814" },
+    type: "app",
+    description: "Linuxディストリビューション",
+  },
   vim: {
     logo: { icon: <VimIcon />, color: "#019733" },
     type: "app",
@@ -186,6 +197,7 @@ export const contentsTagRecord = {
   画像処理: { type: "skill", description: "" },
   並列処理: { type: "skill", description: "" },
   暗号処理: { type: "skill", description: "" },
+  機械学習: { type: "skill", description: "" },
   フロントエンド: { type: "skill", description: "" },
   サーバサイド: { type: "skill", description: "" },
   インフラ: { type: "skill", description: "" },
@@ -784,9 +796,25 @@ FIDO2やTOTP等の多要素認証に対応。
     title: "自宅サーバ",
     summary: "自宅サーバ構築",
     description:
-      "自宅サーバをRaspiで運用しています。dockerを利用しNextcloud・Jellyfin・Gitea等を利用中。公開できるものを用意したい。",
-    tag: ["自分用・趣味", "Docker", "インフラ"],
+      "自宅サーバをRaspiで運用しています。tailscaleを利用してイントラネットを構築。dockerで立ち上げたNextcloud・Jellyfin・Gitea等を自分用に利用中。ゆくゆくは公開サーバにしたい。",
+    tag: ["自分用・趣味", "Docker", "Ubuntu", "インフラ"],
     date: "2023-02-11",
+  },
+  {
+    title: "研究室サーバ",
+    summary: "研究室サーバ運用",
+    description:
+      "研究室のラックサーバの運用管理を行っていました。10台以上の各種ラックの管理、新規サーバの設置・ネットワークの設定等を実施。Dockerを利用したPythonの機械学習研究用の環境構築等。また、その延長でAzureを利用したクラウド上の仮想サーバについても構築や操作を行いました。",
+    tag: [
+      "研究用",
+      "Docker",
+      "Python",
+      "Ubuntu",
+      "インフラ",
+      "機械学習",
+      "Azure",
+    ],
+    date: "2023-04-01",
   },
 ]
 

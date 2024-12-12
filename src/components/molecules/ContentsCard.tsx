@@ -74,7 +74,7 @@ export const ContentsCard = (props: { source: Source }) => {
             tags={props.source.tag}
             onClick={(tag) => {
               context.dispatch(tagClick(tag))
-              return true
+              return false
             }}
           />
         </Box>
