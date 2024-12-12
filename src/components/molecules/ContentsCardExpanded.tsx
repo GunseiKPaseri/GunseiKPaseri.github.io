@@ -6,8 +6,10 @@ import CardMedia from "@mui/material/CardMedia"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 
+import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import type { Source } from "../../sourceMeta.tsx"
+import { appContext, tagOnlyClick } from "../../state/context.ts"
 import { CardLinkButton } from "../atom/CardLinkButton.tsx"
 import { Markdown } from "../atom/Markdown.tsx"
 import { NewBudge } from "../atom/NewBudge.tsx"
@@ -15,6 +17,7 @@ import { TagList } from "./TagList.tsx"
 
 export const ContentsCardExpanded = (props: { source: Source }) => {
   const navigate = useNavigate()
+  const context = useContext(appContext)
   const date = new Date(props.source.date)
   const dateString = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`
 
@@ -47,9 +50,13 @@ export const ContentsCardExpanded = (props: { source: Source }) => {
           <Box sx={{ p: 1, pt: 0 }}>
             <TagList
               tags={props.source.tag}
-              onClick={(_, active) => {
-                if (!active) navigate("/productions")
-                return true
+              onClick={(tag, active) => {
+                if (active) {
+                  return true
+                }
+                context.dispatch(tagOnlyClick(tag))
+                navigate("/productions")
+                return false
               }}
             />
           </Box>

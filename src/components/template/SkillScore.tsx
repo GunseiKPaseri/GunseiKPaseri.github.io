@@ -1,8 +1,10 @@
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import Typography from "@mui/material/Typography"
+import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
-import { contentsTagEntries } from "../../sourceMeta"
+import { contentsTagEntries, sources } from "../../sourceMeta"
+import { appContext, tagOnlyClick } from "../../state/context"
 import { TagChip } from "../atom/TagChip"
 
 const skill = [
@@ -13,11 +15,32 @@ const skill = [
 
 export function SkillScore() {
   const navigate = useNavigate()
+  const context = useContext(appContext)
   return (
     <Card sx={{ padding: 2, mb: 2 }}>
       <CardContent>
         <Typography variant="h4" color="inherit">
-          Skill Score
+          Skill
+        </Typography>
+        <Typography variant="h5" color="inherit">
+          資格試験
+        </Typography>
+        <Typography variant="body1" color="inherit">
+          <ul>
+            {sources
+              .filter((x) => x.tag.includes("資格"))
+              .map((x) => (
+                <li key={x.title}>{x.title}</li>
+              ))}
+          </ul>
+          <TagChip
+            key="資格"
+            tag="資格"
+            onClick={(_, active) => {
+              if (!active) navigate("/productions")
+              return true
+            }}
+          />
         </Typography>
         {skill.map(([score, text]) => (
           <div key={score}>
@@ -32,8 +55,12 @@ export function SkillScore() {
                     key={tag}
                     tag={tag}
                     onClick={(_, active) => {
-                      if (!active) navigate("/productions")
-                      return true
+                      if (active) {
+                        return true
+                      }
+                      context.dispatch(tagOnlyClick(tag))
+                      navigate("/productions")
+                      return false
                     }}
                   />
                 ))}

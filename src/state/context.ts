@@ -7,7 +7,15 @@ export const tagClick = (tag: ContentsTag) => ({
   payload: { tag },
 })
 
-export type AppAction = ReturnType<typeof tagClick>
+const TagOnlyClickAction = "tagonlyclick" as const
+export const tagOnlyClick = (tag: ContentsTag) => ({
+  type: TagOnlyClickAction,
+  payload: { tag },
+})
+
+export type AppAction =
+  | ReturnType<typeof tagClick>
+  | ReturnType<typeof tagOnlyClick>
 
 type AppState = {
   selectedTags: ContentsTag[]
@@ -28,6 +36,11 @@ export const appReducer: React.Reducer<AppState, AppAction> = (
         selectedTags: state.selectedTags.includes(actions.payload.tag)
           ? state.selectedTags.filter((t) => t !== actions.payload.tag)
           : [...state.selectedTags, actions.payload.tag],
+      }
+    case TagOnlyClickAction:
+      return {
+        ...state,
+        selectedTags: [actions.payload.tag],
       }
     default:
       return state
