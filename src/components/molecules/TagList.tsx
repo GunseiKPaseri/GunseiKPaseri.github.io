@@ -1,11 +1,14 @@
 import Box from "@mui/material/Box"
+import { useContext } from "react"
 import type { ContentsTag } from "../../sourceMeta"
-import { TagChip } from "../atom/TagChip"
+import { appContext } from "../../state/context"
+import { type OnClick, TagChip } from "../atom/TagChip"
 
 export const TagList = (props: {
   tags: readonly ContentsTag[]
-  onClick?: (tag: ContentsTag) => void
+  onClick?: OnClick
 }) => {
+  const context = useContext(appContext)
   return (
     <Box sx={{ width: "100%", display: "flex", flexWrap: "wrap" }}>
       {props.tags.map((x) => (
@@ -13,7 +16,9 @@ export const TagList = (props: {
           key={x}
           tag={x}
           onClick={
-            props.onClick !== undefined ? () => props.onClick?.(x) : undefined
+            props.onClick !== undefined
+              ? () => props.onClick?.(x, context.selectedTags.includes(x))
+              : undefined
           }
         />
       ))}

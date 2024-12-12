@@ -95,11 +95,13 @@ export const contentsTagRecord = {
     logo: { icon: <GoIcon />, color: "#00acd7" },
     type: "language",
     description: "システムプログラミング言語",
+    score: 2,
   },
   JavaScript: {
     logo: { icon: <JavaScriptIcon />, color: "#f7df1e" },
     type: "language",
     description: "Webプログラミング言語",
+    score: 4,
   },
   jQuery: {
     logo: { icon: <JqueryIcon />, color: "#0865a7" },
@@ -125,6 +127,7 @@ export const contentsTagRecord = {
     logo: { icon: <PythonIcon />, color: "#306998" },
     type: "language",
     description: "汎用プログラミング言語",
+    score: 2,
   },
   Rails: {
     logo: { icon: <RailsIcon />, color: "#cc0000" },
@@ -150,6 +153,7 @@ export const contentsTagRecord = {
     logo: { icon: <RustIcon />, color: "#000000" },
     type: "language",
     description: "システムプログラミング言語",
+    score: 3,
   },
   "Peg.js/Peggy": { type: "app", description: "パーサージェネレーター" },
   SQL: {
@@ -176,6 +180,7 @@ export const contentsTagRecord = {
     logo: { icon: <TypeScriptIcon />, color: "#3178c6" },
     type: "language",
     description: "JavaScriptの型付け拡張",
+    score: 4,
   },
   構文解析: { type: "skill", description: "テキストの構造化" },
   画像処理: { type: "skill", description: "" },
@@ -644,8 +649,16 @@ FIDO2やTOTP等の多要素認証に対応。
     description:
       "高速なformat・lintを提供する。ドキュメントの誤植、新規のルールを実装するプルリクが取り込まれている。",
     link: [
-      {"type": "other", "message": "公式サイト", "url": "https://biomejs.dev/"},
-      {"type": "github", "message": "Commits", "url": "https://github.com/biomejs/biome/commits?author=GunseiKPaseri"},
+      {
+        "type": "other",
+        "message": "公式サイト",
+        "url": "https://biomejs.dev/",
+      },
+      {
+        "type": "github",
+        "message": "Commits",
+        "url": "https://github.com/biomejs/biome/commits?author=GunseiKPaseri",
+      },
       "https://www.npmjs.com/package/@biomejs/biome",
     ],
     tag: [

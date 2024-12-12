@@ -29,6 +29,7 @@ export type ContentsTagRecordConditions = Record<
     logo?: Logo
     type: ContentsTagClassifications
     description: string
+    score?: 0 | 1 | 2 | 3 | 4 | 5
   }
 >
 
