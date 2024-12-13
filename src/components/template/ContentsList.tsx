@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid2"
-import { AnimatePresence, motion } from "framer-motion"
+import { AnimatePresence, motion } from "motion/react"
 import { useContext, useMemo, useState } from "react"
 
 import { sources } from "../../sourceMeta"
