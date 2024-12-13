@@ -1,3 +1,4 @@
+import { type ReactNode } from "react"
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium"
 import {
   type AutoContents,
@@ -11,7 +12,7 @@ import {
 import { type OmitByValue, type PickByValue, entries, keys } from "./util"
 
 export type Logo = {
-  icon: JSX.Element
+  icon: ReactNode
   color: string
   backgroundColor?: string
 }
@@ -48,7 +49,7 @@ export type ContentsTag = ContentsTagAuto | ContentsTagManual
 
 export type LinkItemRecordConditions = Record<
   string,
-  { message: string; icon: JSX.Element; title: string; domain: string[] }
+  { message: string; icon: ReactNode; title: string; domain: string[] }
 >
 
 export const linkItems = keys(linkItemRecord)

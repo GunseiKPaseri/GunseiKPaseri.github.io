@@ -5,10 +5,7 @@ import { appContext, appInitialState, appReducer } from "./context"
 export const AppContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [state, dispatch] = useReducer<typeof appReducer>(
-    appReducer,
-    appInitialState,
-  )
+  const [state, dispatch] = useReducer(appReducer, appInitialState)
   return (
     <appContext.Provider
       value={{
