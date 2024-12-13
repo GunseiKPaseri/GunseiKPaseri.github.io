@@ -1,5 +1,5 @@
-import { type ReactNode } from "react"
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium"
+import type { ReactNode } from "react"
 import {
   type AutoContents,
   type ContentsTagClassificationRecord,

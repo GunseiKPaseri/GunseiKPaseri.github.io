@@ -1,4 +1,4 @@
-import { createContext, type Reducer, type Dispatch } from "react"
+import { type Dispatch, type Reducer, createContext } from "react"
 import type { ContentsTag } from "../sourceMeta"
 
 const TagClickAction = "tagclick" as const
@@ -25,10 +25,7 @@ export const appInitialState: AppState = {
   selectedTags: [],
 }
 
-export const appReducer: Reducer<AppState, AppAction> = (
-  state,
-  actions,
-) => {
+export const appReducer: Reducer<AppState, AppAction> = (state, actions) => {
   switch (actions.type) {
     case TagClickAction:
       return {
