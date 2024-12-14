@@ -10,6 +10,7 @@ export const AppContextProvider: React.FC<{ children: ReactNode }> = ({
     <appContext.Provider
       value={{
         selectedTags: state.selectedTags,
+        searchWord: state.searchWord,
         dispatch: dispatch,
       }}
     >

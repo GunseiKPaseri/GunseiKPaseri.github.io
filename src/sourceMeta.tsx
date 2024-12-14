@@ -3,6 +3,7 @@ import type { ReactNode } from "react"
 import {
   type AutoContents,
   type ContentsTagClassificationRecord,
+  contentsTagClassificationRecord,
   contentsTagRecord,
   historyOrigin,
   linkItemRecord,
@@ -19,10 +20,21 @@ export type Logo = {
 
 export type ContentsTagClassificationRecordConditions = Record<
   string,
-  { text: string }
+  { text: string; subTags?: Record<string, { text: string }> }
 >
 
-type ContentsTagClassifications = keyof ContentsTagClassificationRecord
+export const contentsTagClassificationRecordEntries = entries(
+  contentsTagClassificationRecord,
+)
+
+type SubTags = keyof Extract<
+  ContentsTagClassificationRecord[keyof ContentsTagClassificationRecord],
+  { subTags: unknown }
+>["subTags"]
+
+type ContentsTagClassifications =
+  | keyof ContentsTagClassificationRecord
+  | SubTags
 
 export type ContentsTagRecordConditions = Record<
   string,

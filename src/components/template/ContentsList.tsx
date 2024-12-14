@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid2"
 import { AnimatePresence, motion } from "motion/react"
-import { useContext, useMemo, useState } from "react"
+import { useContext, useMemo } from "react"
 
 import { sources } from "../../sourceMeta"
 import { type ContentsTag, contentsTags } from "../../sourceMeta"
@@ -44,19 +44,14 @@ const findSource = (keyword: string, selectedTags: ContentsTag[]) => {
 
 export const ContentsList = () => {
   const context = useContext(appContext)
-  const [searchWord, setSearchWord] = useState("")
   const narrowDownSources = useMemo(
-    () => findSource(searchWord, context.selectedTags),
-    [searchWord, context.selectedTags],
+    () => findSource(context.searchWord, context.selectedTags),
+    [context.searchWord, context.selectedTags],
   )
 
   return (
     <>
-      <SearchCard
-        searchWord={searchWord}
-        setSearchWord={setSearchWord}
-        narrowDownSources={narrowDownSources}
-      />
+      <SearchCard narrowDownSources={narrowDownSources} />
       <Grid container spacing={2}>
         <AnimatePresence mode="popLayout">
           {narrowDownSources

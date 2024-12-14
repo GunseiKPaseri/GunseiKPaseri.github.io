@@ -8,8 +8,8 @@ import { appContext, tagOnlyClick } from "../../state/context"
 import { TagChip } from "../atom/TagChip"
 
 const skill = [
-  [4, "充分な自信と経験、いくつかのプロダクト"],
-  [3, "一定の自信と経験"],
+  [4, "充分な自信、経験"],
+  [3, "一定の自信、経験"],
   [2, "ある程度の取り組み"],
 ]
 
