@@ -1,7 +1,12 @@
 import LinkIcon from "@mui/icons-material/Link"
 import WorkIcon from "@mui/icons-material/Work"
 import { BiPackage as PackageIcon } from "react-icons/bi"
-import { FaCss3 as CSSIcon, FaUbuntu as UbuntuIcon } from "react-icons/fa"
+import {
+  FaCss3 as CSSIcon,
+  FaRaspberryPi as RaspberryPiIcon,
+  FaUbuntu as UbuntuIcon,
+  FaUnity as UnityIcon,
+} from "react-icons/fa"
 import {
   MdSettingsApplications as ConfigIcon,
   MdExtension as ExtensionIcon,
@@ -12,8 +17,11 @@ import {
   SiCodesandbox as CodesandboxIcon,
   SiDeno as DenoIcon,
   SiDocker as DockerIcon,
+  SiExpress as ExpressIcon,
+  SiFortinet as FortinetIcon,
   SiGithub as GitHubIcon,
   SiGo as GoIcon,
+  SiGoogleappsscript as GoogleAppsScriptIcon,
   SiJavascript as JavaScriptIcon,
   SiJquery as JqueryIcon,
   SiJsr as JsrIcon,
@@ -21,6 +29,7 @@ import {
   SiMui as MuiIcon,
   SiNodedotjs as NodeIcon,
   SiNpm as NpmIcon,
+  SiPrisma as PrismaIcon,
   SiPython as PythonIcon,
   SiQiita as QiitaIcon,
   SiRubyonrails as RailsIcon,
@@ -28,13 +37,20 @@ import {
   SiRedux as ReduxIcon,
   SiRuby as RubyIcon,
   SiRust as RustIcon,
+  SiTailscale as TailscaleIcon,
+  SiTensorflow as TensorflowIcon,
   SiTypescript as TypeScriptIcon,
   SiVim as VimIcon,
+  SiWireshark as WiresharkIcon,
   SiZenn as ZennIcon,
   SiZsh as ZshIcon,
 } from "react-icons/si"
 import { SlNote as NoteIcon } from "react-icons/sl"
-import { TbSql as SQLIcon } from "react-icons/tb"
+import {
+  TbBrandCSharp as CSharpIcon,
+  TbBrandCpp as CppIcon,
+  TbSql as SQLIcon,
+} from "react-icons/tb"
 import { VscAzure as AzureIcon } from "react-icons/vsc"
 import type {
   ContentsTagClassificationRecordConditions,
@@ -57,11 +73,31 @@ export const contentsTagClassificationRecord = {
   publication: {
     text: "公開状況",
   },
-  app: {
-    text: "アプリケーション",
-  },
-  language: {
-    text: "言語",
+  techStack: {
+    text: "技術スタック",
+    subTags: {
+      hardware: {
+        text: "ハードウェア・ネットワーク",
+      },
+      infra: {
+        text: "基盤技術・OS",
+      },
+      language: {
+        text: "言語",
+      },
+      webback: {
+        text: "Webバックエンド",
+      },
+      webfront: {
+        text: "Webフロントエンド",
+      },
+      module: {
+        text: "API・モジュール",
+      },
+      tool: {
+        text: "ツール",
+      },
+    },
   },
 } as const satisfies ContentsTagClassificationRecordConditions
 
@@ -69,19 +105,33 @@ export type ContentsTagClassificationRecord =
   typeof contentsTagClassificationRecord
 
 export const contentsTagRecord = {
-  axum: { type: "app", description: "RustWebフレームワーク" },
+  axum: { type: "webback", description: "Rust向けWebフレームワーク" },
   Azure: {
     logo: { icon: <AzureIcon />, color: "#0089d6" },
-    type: "app",
+    type: "infra",
     description: "クラウドサービス",
   },
-  bash: { type: "app", description: "シェルスクリプト言語" },
+  bash: { type: "infra", description: "シェル・スクリプト言語" },
   Bun: {
     logo: { icon: <BunIcon />, color: "#f3e8b8", backgroundColor: "#000" },
-    type: "app",
+    type: "webback",
     description: "JavaScriptランタイム",
   },
-  Chevrotain: { type: "app", description: "パーサービルダー" },
+  "C++": {
+    logo: { icon: <CppIcon />, color: "#00599c" },
+    type: "language",
+    description: "汎用プログラミング言語",
+    score: 2,
+  },
+  Chevrotain: {
+    type: "module",
+    description: "JavaScript向けパーサービルドツール",
+  },
+  "C#": {
+    logo: { icon: <CSharpIcon />, color: "#239120" },
+    type: "language",
+    description: "汎用プログラミング言語",
+  },
   CSS: {
     logo: { icon: <CSSIcon />, color: "#264de4" },
     type: "language",
@@ -89,13 +139,28 @@ export const contentsTagRecord = {
   },
   Deno: {
     logo: { icon: <DenoIcon />, color: "#000000" },
-    type: "app",
+    type: "webback",
     description: "JavaScriptランタイム",
   },
   Docker: {
     logo: { icon: <DockerIcon />, color: "#2496ed" },
-    type: "app",
+    type: "infra",
     description: "コンテナ化技術",
+  },
+  Express: {
+    logo: { icon: <ExpressIcon />, color: "#000000" },
+    type: "webback",
+    description: "Node.js向けWebフレームワーク",
+  },
+  FortiGate: {
+    logo: { icon: <FortinetIcon />, color: "#ee3124" },
+    type: "hardware",
+    description: "ファイアウォール・UTM装置",
+  },
+  GAS: {
+    logo: { icon: <GoogleAppsScriptIcon />, color: "#f4b400" },
+    type: "tool",
+    description: "Google自動化言語・アプリケーションフレームワーク",
   },
   Go: {
     logo: { icon: <GoIcon />, color: "#00acd7" },
@@ -111,23 +176,32 @@ export const contentsTagRecord = {
   },
   jQuery: {
     logo: { icon: <JqueryIcon />, color: "#0865a7" },
-    type: "app",
-    description: "DOM操作ライブラリ",
+    type: "webfront",
+    description: "JavaScript向けDOM操作ライブラリ",
   },
   minIO: {
     logo: { icon: <MinIOIcon />, color: "#c72745" },
-    type: "app",
+    type: "webback",
     description: "オブジェクトストレージサーバ",
   },
   MUI: {
     logo: { icon: <MuiIcon />, color: "#0081cb" },
-    type: "app",
-    description: "UIコンポーネントライブラリ",
+    type: "webfront",
+    description: "React向けUIコンポーネントライブラリ",
   },
   "Node.js": {
     logo: { icon: <NodeIcon />, color: "#68a063" },
-    type: "app",
+    type: "webback",
     description: "JavaScriptランタイム",
+  },
+  oak: {
+    type: "webback",
+    description: "Deno向けWebフレームワーク",
+  },
+  Prisma: {
+    logo: { icon: <PrismaIcon />, color: "#000000" },
+    type: "webback",
+    description: "ORMフレームワーク",
   },
   Python: {
     logo: { icon: <PythonIcon />, color: "#306998" },
@@ -137,23 +211,29 @@ export const contentsTagRecord = {
   },
   Rails: {
     logo: { icon: <RailsIcon />, color: "#cc0000" },
-    type: "app",
+    type: "webback",
     description: "Ruby用Webフレームワーク",
+  },
+  RaspberryPi: {
+    logo: { icon: <RaspberryPiIcon />, color: "#c51a4a" },
+    type: "hardware",
+    description: "シングルボードコンピュータ",
   },
   React: {
     logo: { icon: <ReactIcon />, color: "#61dafb" },
-    type: "app",
-    description: "UI開発ライブラリ",
+    type: "webfront",
+    description: "JavaScript向けUI開発ライブラリ",
   },
   Redux: {
     logo: { icon: <ReduxIcon />, color: "#764abc" },
-    type: "app",
-    description: "React用状態管理ライブラリ",
+    type: "webfront",
+    description: "React向け状態管理ライブラリ",
   },
   Ruby: {
     logo: { icon: <RubyIcon />, color: "#cc342d" },
     type: "language",
     description: "汎用プログラミング言語",
+    score: 3,
   },
   Rust: {
     logo: { icon: <RustIcon />, color: "#000000" },
@@ -161,30 +241,60 @@ export const contentsTagRecord = {
     description: "システムプログラミング言語",
     score: 3,
   },
-  "Peg.js/Peggy": { type: "app", description: "パーサージェネレーター" },
+  "Peg.js/Peggy": {
+    type: "module",
+    description: "JavaScript向けパーサージェネレーター",
+  },
   SQL: {
     logo: { icon: <SQLIcon />, color: "#000000" },
-    type: "app",
-    description: "DB操作",
+    type: "language",
+    description: "DB操作言語",
+  },
+  Tailscale: {
+    logo: { icon: <TailscaleIcon />, color: "#000000" },
+    type: "infra",
+    description: "VPNサービス",
+  },
+  "TensorFlow.js": {
+    logo: { icon: <TensorflowIcon />, color: "#ff6f00" },
+    type: "module",
+    description: "機械学習ライブラリ",
   },
   Ubuntu: {
     logo: { icon: <UbuntuIcon />, color: "#dd4814" },
-    type: "app",
+    type: "infra",
     description: "Linuxディストリビューション",
+  },
+  Unity: {
+    logo: { icon: <UnityIcon />, color: "#000000" },
+    type: "tool",
+    description: "ゲームエンジン",
   },
   vim: {
     logo: { icon: <VimIcon />, color: "#019733" },
-    type: "app",
+    type: "tool",
     description: "テキストエディタ",
+  },
+  VMWare: {
+    type: "infra",
+    description: "仮想化ソフトウェア",
+  },
+  WireShark: {
+    logo: { icon: <WiresharkIcon />, color: "#2286b6" },
+    type: "tool",
+    description: "パケットキャプチャツール",
   },
   zsh: {
     logo: { icon: <ZshIcon />, color: "#e84e0e" },
-    type: "app",
-    description: "シェルスクリプト言語",
+    type: "tool",
+    description: "シェル",
   },
-  TextAliveAppAPI: { type: "app", description: "歌詞連動アニメーションAPI" },
+  TextAliveAppAPI: {
+    type: "module",
+    description: "JavaScript向け歌詞連動アニメーションAPI",
+  },
   Textlint: {
-    type: "app",
+    type: "tool",
     description: "テキスト検査ツール",
   },
   TypeScript: {
@@ -485,6 +595,8 @@ FIDO2やTOTP等の多要素認証に対応。
       "minIO",
       "SQL",
       "MUI",
+      "oak",
+      "Prisma",
       "Webアプリ",
       "暗号処理",
     ],
@@ -636,7 +748,7 @@ FIDO2やTOTP等の多要素認証に対応。
       "Peg.js/Peggy",
     ],
     date: "2023-01-07",
-    score: 2,
+    score: 3,
   },
   {
     title: "detect-chinese",
@@ -660,7 +772,7 @@ FIDO2やTOTP等の多要素認証に対応。
     title: "biome",
     summary: "Web開発ツールチェーン",
     description:
-      "高速なformat・lintを提供する。ドキュメントの誤植、新規のルールを実装するプルリクが取り込まれている。",
+      "高速なformat・lintを提供する。ドキュメントの誤植修正、新規のルールを実装するプルリクが取り込まれている。",
     link: [
       {
         "type": "other",
@@ -701,7 +813,7 @@ FIDO2やTOTP等の多要素認証に対応。
       "画像処理",
     ],
     date: "2022-03-13",
-    score: 1,
+    score: 2,
   },
   {
     title: "俺得拡張機能集",
@@ -733,6 +845,23 @@ FIDO2やTOTP等の多要素認証に対応。
       "フロントエンド",
     ],
     date: "2021-09-27",
+  },
+  {
+    title: "AtCoder",
+    summary: "競技プログラミング",
+    description:
+      "AtCoderにて競技プログラミングを行っていました。当時はABCを中心に参加していました。",
+    link: ["https://atcoder.jp/users/GunseiKPaseri"],
+    tag: ["自分用・趣味", "C++"],
+    date: "2021-06-06",
+  },
+  {
+    title: "バッティングゲーム",
+    summary: "VRゲーム",
+    description:
+      "Unityを利用して簡単なVRゲームを作成しました。バッティングゲームで、バットに見立てたリモコンを用い、投球を打ち返せるか試します。サインカーブを描く魔球等も実装しました。",
+    tag: ["自分用・趣味", "C#", "Unity"],
+    date: "2019-04-01",
   },
   {
     title: "Mery構文ファイル",
@@ -797,22 +926,32 @@ FIDO2やTOTP等の多要素認証に対応。
     summary: "自宅サーバ構築",
     description:
       "自宅サーバをRaspiで運用しています。tailscaleを利用してイントラネットを構築。dockerで立ち上げたNextcloud・Jellyfin・Gitea等を自分用に利用中。ゆくゆくは公開サーバにしたい。",
-    tag: ["自分用・趣味", "Docker", "Ubuntu", "インフラ"],
+    tag: [
+      "自分用・趣味",
+      "Docker",
+      "RaspberryPi",
+      "Tailscale",
+      "Ubuntu",
+      "インフラ",
+    ],
     date: "2023-02-11",
   },
   {
     title: "研究室サーバ",
-    summary: "研究室サーバ運用",
+    summary: "研究室サーバ管理・運用",
     description:
-      "研究室のラックサーバの運用管理を行っていました。10台以上の各種ラックの管理、新規サーバの設置・ネットワークの設定等を実施。Dockerを利用したPythonの機械学習研究用の環境構築等。また、その延長でAzureを利用したクラウド上の仮想サーバについても構築や操作を行いました。",
+      "研究室のラックサーバの運用管理を行っていました。10台以上の各種ラックの管理、新規サーバの設置・ネットワークの設定等を実施。Dockerを利用したPythonの機械学習研究用の環境構築、Azure上の仮想サーバの構築や操作、GASを用いたSlackへの定期的なBot通知など多岐に渡りました。",
     tag: [
       "研究用",
       "Docker",
       "Python",
+      "FortiGate",
       "Ubuntu",
+      "VMWare",
       "インフラ",
       "機械学習",
       "Azure",
+      "GAS",
     ],
     date: "2023-04-01",
   },

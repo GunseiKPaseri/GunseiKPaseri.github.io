@@ -16,7 +16,7 @@ function App() {
             成果物・取り組み・実績
           </Typography>
           <Typography variant="body1">
-            これまで作成したものを並べておきます。興味あるところを検索してみてください。
+            これまで作成したもの・取り組んだ事等を並べております。興味あるところを検索してみてください。検索結果の無いタグについても操作経験等があります。
           </Typography>
         </CardContent>
         <CardActions>
