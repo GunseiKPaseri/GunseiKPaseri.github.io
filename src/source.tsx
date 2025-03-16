@@ -667,12 +667,13 @@ FIDO2やTOTP等の多要素認証に対応。
     score: 3,
   },
   {
-    title: "promise_array_parallel",
+    title: "promise-array-parallel",
     summary: "簡易並列処理ライブラリ",
     description:
       "与えられた複数の非同期関数について、完了後に並列数を制限しながら別の非同期関数を実行する等を簡易的に実現する。JavaScript標準のPromise.all等と使い心地が揃うようにしている。またGitHubActionを利用し、GitHub経由でリリースするとnpm及びdeno.landにおいて自動で公開されるようになっており、Node.js・Deno両環境で使うことができる。研究の際に欲しかった機能を改めてパッケージ化。",
     link: [
-      "https://github.com/GunseiKPaseri/promise_array_parallel",
+      "https://github.com/GunseiKPaseri/promise-array-parallel",
+      "https://jsr.io/@gunseikpaseri/promise-array-parallel",
       "https://www.npmjs.com/package/promise_array_parallel",
       "https://deno.land/x/promise_array_parallel",
     ],
